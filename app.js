@@ -141,12 +141,13 @@ window.addEventListener('load', () => {
     
                 // Add a list of links to the matched elements
                 for (const match of matches) {
-    
+                    summaryEl.classList.add('found-matches')
+                    
                     const nearestId = findNearestId(match)
                     const typeOfEl = findTypeOfEl(match)
     
                     const li = document.createElement('li')
-                    li.innerHTML = `${pageJson.title} <a href="${pageUrl}#${nearestId}">${typeOfEl}</a>`
+                    li.innerHTML = `${pageJson.title} <a href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
                     bookResultsEl.appendChild(li)
                 }
 
