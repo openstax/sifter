@@ -86,6 +86,10 @@ window.addEventListener('load', () => {
         isStopping = false
         resultsEl.innerHTML = ''
 
+        startEl.disabled = true
+        stopEl.disabled = false
+        skipEl.disabled = false
+
         // these are done in parallel
         for (const bookUuid of bookUuids) {
             let totalMatches = 0
@@ -116,6 +120,9 @@ window.addEventListener('load', () => {
             for (const pageRef of pageRefs) {
                 // Break when stop button is pressed
                 if (isStopping) {
+                    startEl.disabled = false
+                    stopEl.disabled = true
+                    skipEl.disabled = true
                     return
                 }
                 if (isSkipping) {
@@ -150,6 +157,10 @@ window.addEventListener('load', () => {
             }
                 
         }
+
+        startEl.disabled = false
+        stopEl.disabled = true
+        skipEl.disabled = true
 
     })
 

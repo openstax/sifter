@@ -6,10 +6,12 @@
         <script src="./app.js"></script>
     </head>
     <body>
-        <input id="selector" type="text" placeholder="Selector"/>
+        <h1>Bulk Content Search</h1>
+        <p>This searches most of our books for content by loading the books in your browser. It's slow but it does not really require maintenance</p>
+        <input id="selector" type="text" placeholder="CSS Selector"/>
         <button id="start">Start</button>
-        <button id="stop">Stop</button>
-        <button id="skip">Skip</button>
+        <button id="stop" disabled="disabled">Stop</button>
+        <button id="skip" disabled="disabled">Skip</button>
         <label for="stop-after-one">Stop after one is found:</label>
         <input id="stop-after-one" type="checkbox" checked="checked"/>
         <ul id="results"></ul>
