@@ -46,7 +46,6 @@ window.addEventListener('load', () => {
         /* University Physics vol 2 */ '7a0f9770-1c44-4acd-9920-1cd9a99f2a1e',
         /* University Physics vol 3 */ 'af275420-6050-4707-995c-57b9cc13c358',
     ]
-    shuffle(bookUuids)
 
     const selectorEl = document.querySelector('#selector')
     const startEl = document.querySelector('#start')
@@ -142,7 +141,7 @@ window.addEventListener('load', () => {
                 // Add a list of links to the matched elements
                 for (const match of matches) {
                     summaryEl.classList.add('found-matches')
-                    
+
                     const nearestId = findNearestId(match)
                     const typeOfEl = findTypeOfEl(match)
     
@@ -207,11 +206,4 @@ window.addEventListener('load', () => {
         return tagName
     }
 
-    // https://stackoverflow.com/a/12646864
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
 })
