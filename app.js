@@ -55,6 +55,10 @@ window.addEventListener('load', () => {
     const resultsEl = document.querySelector('#results')
     const sandboxEl = document.querySelector('#sandbox')
     const stopAfterOneEl = document.querySelector('#stop-after-one')
+    const bookCountEl = document.querySelector('#book-count')
+
+    bookCountEl.textContent = bookUuids.length
+    
 
     let isStopping = false
     let isSkipping = false
@@ -101,6 +105,7 @@ window.addEventListener('load', () => {
             const bookResultsEl = document.createElement('ul')
             const bookLogEl = document.createElement('span')
             const bookTitleEl = document.createElement('span')
+            bookLogEl.classList.add('book-status')
             t1.appendChild(detailsEl)
             detailsEl.appendChild(summaryEl)
             summaryEl.appendChild(bookTitleEl)
@@ -136,7 +141,7 @@ window.addEventListener('load', () => {
                 
                 const matches = findMatches(selectorEl.value, pageJson.content)
                 totalMatches += matches.length
-                bookLogEl.textContent = `(${i}/${pageRefs.length}. Found ${totalMatches})`
+                bookLogEl.textContent = `(${i + 1}/${pageRefs.length}. Found ${totalMatches})`
     
                 // Add a list of links to the matched elements
                 for (const match of matches) {
