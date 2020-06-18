@@ -63,10 +63,6 @@ window.addEventListener('load', () => {
     let isStopping = false
     let isSkipping = false
 
-    function results(el) {
-        resultsEl.appendChild(el)
-    }
-
     // load the form from the URL
     if (window.location.hash.length > 1) {
         const state = JSON.parse(decodeURIComponent(window.location.hash.substring(1)))
@@ -75,7 +71,7 @@ window.addEventListener('load', () => {
 
     skipEl.addEventListener('click', () => isSkipping = true)
     stopEl.addEventListener('click', () => isStopping = true)
-    startEl.addEventListener('click', async () => {
+    const startFn = async () => {
         // For each book, fetch the ToC
         // Fetch each Page
         // Replace ` src=` with ` data-src=` so we do not fetch images
@@ -112,7 +108,7 @@ window.addEventListener('load', () => {
             summaryEl.appendChild(bookLogEl)
 
             detailsEl.appendChild(bookResultsEl)
-            results(t1)
+            resultsEl.appendChild(t1)
 
             const bookUrl = `${serverRootUrl}/${bookUuid}`
             const bookJson = await (await fetch(bookUrl)).json()
@@ -167,6 +163,16 @@ window.addEventListener('load', () => {
         stopEl.disabled = true
         skipEl.disabled = true
 
+    }
+    startEl.addEventListener('click', async () => {
+        try {
+            await startFn()
+        } catch (err) {
+            alert(err.message)
+            startEl.disabled = false
+            stopEl.disabled = true
+            skipEl.disabled = true
+        }
     })
 
     function recLeafPages(acc, node) {

@@ -1,5 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="manifest" href="./manifest.json" />    
         <style>
             #sandbox { display: none; }
             #results { list-style: none; }
@@ -7,6 +10,14 @@
             .book-status { color: #888; }
         </style>
         <script src="./app.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
     </head>
     <body>
         <h1>Bulk Content Search</h1>
