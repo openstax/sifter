@@ -45,6 +45,11 @@ window.addEventListener('load', () => {
         /* University Physics vol 1 */ 'd50f6e32-0fda-46ef-a362-9bd36ca7c97d',
         /* University Physics vol 2 */ '7a0f9770-1c44-4acd-9920-1cd9a99f2a1e',
         /* University Physics vol 3 */ 'af275420-6050-4707-995c-57b9cc13c358',
+
+        /* Polish Physics 1 */ '4eaa8f03-88a8-485a-a777-dd3602f6c13e',
+        /* Polish Physics 2 */ '16ab5b96-4598-45f9-993c-b8d78d82b0c6',
+        /* Polish Physics 3 */ 'bb62933e-f20a-4ffc-90aa-97b36c296c3e',
+
     ]
 
     const selectorEl = document.querySelector('#selector')
@@ -61,6 +66,24 @@ window.addEventListener('load', () => {
 
     let isStopping = false
     let isSkipping = false
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+    function* times(x) {
+        for (var i = 0; i < x; i++)
+            yield i;
+    }
+    async function fetchWithBackoff(url) {
+        for (var _ of times(3)) {
+            try {
+                return fetchJson(url)
+            } catch (err) {
+            }
+            await sleep(300)
+        }
+        return fetchJson(url)
+    }
+    const fetchJson = async (url) => (await fetch(url)).json() 
+
 
     skipEl.addEventListener('click', () => isSkipping = true)
     stopEl.addEventListener('click', () => isStopping = true)
@@ -104,7 +127,7 @@ window.addEventListener('load', () => {
             resultsEl.appendChild(t1)
 
             const bookUrl = `${serverRootUrl}/${bookUuid}`
-            const bookJson = await (await fetch(bookUrl)).json()
+            const bookJson = await fetchWithBackoff(bookUrl)
 
             bookTitleEl.textContent = bookJson.title
 
@@ -125,7 +148,7 @@ window.addEventListener('load', () => {
                 const i = pageRefs.indexOf(pageRef)
     
                 const pageUrl = `${bookUrl}:${pageRef.id}`
-                const pageJson = await (await fetch(pageUrl)).json()
+                const pageJson = await fetchWithBackoff(pageUrl)
       
                 
                 const matches = findMatches(selectorEl.value, pageJson.content)
