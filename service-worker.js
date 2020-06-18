@@ -5,25 +5,21 @@ if (workbox) {
     const { CacheFirst, StaleWhileRevalidate } = workbox.strategies;
     const { CacheableResponsePlugin } = workbox.cacheableResponse;
 
+    const isPageUrl = (url) => /cnx\.org/.test(url.hostname) && /:/.test(url.pathname)
+
+    // Cache Pages forever because they have a version in them
     registerRoute(
-        ({ url }) => {
-            return /cnx\.org/.test(url.hostname) && /:/.test(url.pathname) // Cache Pages because they have a version in them
-        },
+        ({ url }) => isPageUrl(url),
         new CacheFirst({
-            plugins: [
-            new CacheableResponsePlugin({statuses: [0, 200]})
-            ],
+            plugins: [ new CacheableResponsePlugin({statuses: [0, 200]}) ],
         })
     );
 
+    // Use the cached version but check for updates for JS, HTML, and the book JSON
     registerRoute(
-        ({ url }) => {
-            return !/cnx\.org/.test(url.hostname) // Pull updates for the HTML, JS code that is hosted
-        },
+        ({ url }) => !isPageUrl(url),
         new StaleWhileRevalidate({
-            plugins: [
-            new CacheableResponsePlugin({statuses: [0, 200]})
-            ],
+            plugins: [ new CacheableResponsePlugin({statuses: [0, 200]}) ],
         })
     );
 
