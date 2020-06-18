@@ -95,13 +95,15 @@ window.addEventListener('load', () => {
         // Run the query
         // Remember if there was a match (maybe find the nearest id attribute)
 
+        const selector = selectorEl.value
         // update the URL so that folks can share their search
-        history.pushState(null, null, `#${encodeURIComponent(JSON.stringify({q: selectorEl.value}))}`)
+        history.pushState(null, null, `#${encodeURIComponent(JSON.stringify({q: selector}))}`)
 
         // clear
         isStopping = false
         resultsEl.innerHTML = ''
 
+        selectorEl.disabled = true
         startEl.disabled = true
         stopEl.disabled = false
         skipEl.disabled = false
@@ -137,6 +139,7 @@ window.addEventListener('load', () => {
             for (const pageRef of pageRefs) {
                 // Break when stop button is pressed
                 if (isStopping) {
+                    selectorEl.disabled = false
                     startEl.disabled = false
                     stopEl.disabled = true
                     skipEl.disabled = true
@@ -151,13 +154,13 @@ window.addEventListener('load', () => {
                 const pageJson = await fetchWithBackoff(pageUrl)
       
                 
-                const matches = findMatches(selectorEl.value, pageJson.content)
+                const matches = findMatches(selector, pageJson.content)
                 totalMatches += matches.length
                 bookLogEl.textContent = `(${i + 1}/${pageRefs.length}. Found ${totalMatches})`
     
                 // Add a list of links to the matched elements
                 for (const match of matches) {
-                    summaryEl.classList.add('found-matches')
+                    detailsEl.classList.add('found-matches')
 
                     const nearestId = findNearestId(match)
                     const typeOfEl = findTypeOfEl(match)
@@ -176,6 +179,7 @@ window.addEventListener('load', () => {
                 
         }
 
+        selectorEl.disabled = false
         startEl.disabled = false
         stopEl.disabled = true
         skipEl.disabled = true
@@ -186,6 +190,7 @@ window.addEventListener('load', () => {
             await startFn()
         } catch (err) {
             alert(err.message)
+            selectorEl.disabled = false
             startEl.disabled = false
             stopEl.disabled = true
             skipEl.disabled = true

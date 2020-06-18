@@ -6,9 +6,8 @@
         <style>
             #sandbox { display: none; }
             #results { list-style: none; }
-            summary { cursor: pointer; }
-            .book-status { color: #888; }
-            .found-matches { font-weight: bold; }
+            details:not(.found-matches) { color: #888; list-style-type: none; }
+            details.found-matches summary { cursor: pointer; font-weight: bold; }
         </style>
         <script src="./app.js"></script>
         <script>
