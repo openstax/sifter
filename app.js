@@ -62,12 +62,6 @@ window.addEventListener('load', () => {
     let isStopping = false
     let isSkipping = false
 
-    // load the form from the URL
-    if (window.location.hash.length > 1) {
-        const state = JSON.parse(decodeURIComponent(window.location.hash.substring(1)))
-        selectorEl.value = state.q
-    }
-
     skipEl.addEventListener('click', () => isSkipping = true)
     stopEl.addEventListener('click', () => isStopping = true)
     const startFn = async () => {
@@ -174,6 +168,13 @@ window.addEventListener('load', () => {
             skipEl.disabled = true
         }
     })
+
+    // load the form from the URL
+    if (window.location.hash.length > 1) {
+        const state = JSON.parse(decodeURIComponent(window.location.hash.substring(1)))
+        selectorEl.value = state.q
+        startFn()
+    }
 
     function recLeafPages(acc, node) {
         if (node.contents) {
