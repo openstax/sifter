@@ -120,13 +120,13 @@ window.addEventListener('load', () => {
             const bookLogEl = document.createElement('span')
             const bookTitleEl = document.createElement('span')
             bookLogEl.classList.add('book-status')
-            t1.appendChild(detailsEl)
-            detailsEl.appendChild(summaryEl)
-            summaryEl.appendChild(bookTitleEl)
-            summaryEl.appendChild(bookLogEl)
+            t1.append(detailsEl)
+            detailsEl.append(summaryEl)
+            summaryEl.append(bookTitleEl)
+            summaryEl.append(bookLogEl)
 
-            detailsEl.appendChild(bookResultsEl)
-            resultsEl.appendChild(t1)
+            detailsEl.append(bookResultsEl)
+            resultsEl.prepend(t1)
 
             const bookUrl = `${serverRootUrl}/${bookUuid}`
             const bookJson = await fetchWithBackoff(bookUrl)
@@ -167,7 +167,7 @@ window.addEventListener('load', () => {
     
                     const li = document.createElement('li')
                     li.innerHTML = `${pageJson.title} <a href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
-                    bookResultsEl.appendChild(li)
+                    bookResultsEl.append(li)
                 }
 
                 if (matches.length > 0 && stopAfterOneEl.checked) {
