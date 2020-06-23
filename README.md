@@ -11,11 +11,11 @@ This searches our books using any CSS selector! You can share the link with othe
 
 ## Examples
 
-- [Does our content have a Note inside a Note?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22note%5C%22%5D%20%5Bdata-type%3D%5C%22note%5C%22%5D%22%7D)
+- [Where do we use subscripts?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22sub%22%7D)
 - [Which content is marked `.unnumbered`](https://openstax.github.io/sifter/#%7B%22q%22%3A%22.unnumbered%22%7D)
 - [Do we even use the `<c:foreign>` tag?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22foreign%5C%22%5D%22%7D)
 - [Where are our footnotes?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Brole%3D%5C%22doc-footnote%5C%22%5D%22%7D)
-- [What do we use subscripts for?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22sub%22%7D)
+- [Does our content have a Note inside a Note?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22note%5C%22%5D%20%5Bdata-type%3D%5C%22note%5C%22%5D%22%7D)
 
 # Screencap
 
