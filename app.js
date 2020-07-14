@@ -84,6 +84,28 @@ window.addEventListener('load', () => {
     }
     const fetchJson = async (url) => (await fetch(url)).json() 
 
+    const validateSelector = () => {
+        const selector = selectorEl.value
+        // Try validating this as a CSS selector
+        try {
+            document.querySelector(selector)
+            selectorEl.setCustomValidity('') // valid!
+            return
+        } catch (e) {
+            // validate it as an XPath (ensure it begins with "/h:")
+            if (/^\/h:/.test(selector) || /^\/\/h:/.test(selector) || /^\/\/m:/.test(selector)) {
+                try {
+                    document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
+                    selectorEl.setCustomValidity('') // valid!
+                    return
+                } catch (e) { }
+            }
+        }
+        selectorEl.setCustomValidity("Enter a valid CSS selector or XPath selector. In the case of an XPath selector, ensure that it begins with / and that all elements are prefixed with h: or m:")
+    }
+    selectorEl.addEventListener('input', validateSelector)
+    selectorEl.addEventListener('blur', validateSelector)
+    selectorEl.addEventListener('keyup', validateSelector)
 
     skipEl.addEventListener('click', () => isSkipping = true)
     stopEl.addEventListener('click', () => isStopping = true)
@@ -212,10 +234,45 @@ window.addEventListener('load', () => {
         }
     }
 
+    // https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#Implementing_a_User_Defined_Namespace_Resolver
+    function xpathNamespaceResolver(prefix) {
+        var ns = {
+            'h'     : 'http://www.w3.org/1999/xhtml',
+            'xhtml' : 'http://www.w3.org/1999/xhtml',
+            'm'     : 'http://www.w3.org/1998/Math/MathML',
+            'mml'   : 'http://www.w3.org/1998/Math/MathML',
+            'mathml': 'http://www.w3.org/1998/Math/MathML'
+        }
+        if (ns[prefix]) {
+            return ns[prefix]
+        } else {
+            alert('Invalid namespace prefix. Use "h:" or "xhtml:" or "m:" or "mathml:" .')
+            throw new Error(`Invalid namespace prefix "${prefix}"`)
+        }
+    }
+
     function findMatches(selector, html) {
         html = html.replace(/ src=/g, ' data-src=')
+        
         sandboxEl.innerHTML = html
-        return [...sandboxEl.querySelectorAll(selector)]
+        // Try running the selector as CSS, and then as XPath
+        try {
+            return [...sandboxEl.querySelectorAll(selector)]
+        } catch (err) {
+            // Verify that the Xpath selector begins with "/h:" or "//h:" or "//m:"
+            // See https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#Implementing_a_User_Defined_Namespace_Resolver
+            if (/^\/h:/.test(selector) || /^\/\/h:/.test(selector) || /^\/\/m:/.test(selector)) {
+                const xpathResult = document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
+                const ret = []
+                for (let i = 0; i < xpathResult.snapshotLength; i++) {
+                    ret.push(xpathResult.snapshotItem(i))
+                }
+                return ret
+            } else {
+                alert('What you entered is an invalid CSS selector and an invalid XPath selector. If you are trying to use XPath, all elements must be prefixed with either an `h:` or `m:`')
+                throw new Error(`Invalid selector: "${selector}"`)
+            }
+        }
     }
 
     function findNearestId(el) {

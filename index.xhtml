@@ -8,6 +8,15 @@
             #results { list-style: none; }
             details:not(.found-matches) { color: #888; list-style-type: none; }
             details.found-matches summary { cursor: pointer; font-weight: bold; }
+
+            input:invalid:not(:focus) {
+                border: 3px dashed red;
+            }
+
+            input:invalid ~ button {
+                color: #888;
+                pointer-events: none;
+            }
         </style>
         <script src="./app.js"></script>
         <script>
@@ -23,12 +32,14 @@
         <h1>Bulk Content Search</h1>
         <p>This searches most of our books (<span id="book-count"></span>) for content by loading the books in your browser. The first time is slow but once the books are loaded searches are really fast.</p>
         <p><a href="https://github.com/openstax/sifter">Source</a></p>
-        <input id="selector" type="text" placeholder="CSS Selector"/>
-        <button id="start">Start</button>
-        <button id="stop" disabled="disabled">Stop</button>
-        <button id="skip" disabled="disabled">Skip</button>
-        <label for="stop-after-one">Stop after one is found:</label>
-        <input id="stop-after-one" type="checkbox" checked="checked"/>
+        <form>
+            <input id="selector" placeholder="CSS or XPath (//h:*) Selector"/>
+            <button id="start">Start</button>
+            <button id="stop" disabled="disabled">Stop</button>
+            <button id="skip" disabled="disabled">Skip</button>
+            <label for="stop-after-one">Stop after one is found:</label>
+            <input id="stop-after-one" type="checkbox" checked="checked"/>
+        </form>
         <ul id="results"></ul>
         <div id="sandbox"></div>
     </body>
