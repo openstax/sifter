@@ -181,7 +181,7 @@ window.addEventListener('load', () => {
                 const pageUrl = `${bookUrl}:${pageRef.id}`
                 const pageJson = await fetchWithBackoff(pageUrl)
       
-                analyzeFn('PAGE', pageJson, pageRef.id, bookUuid)
+                analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
                 
                 const matches = findMatches(selector, pageJson.content)
                 totalMatches += matches.length
