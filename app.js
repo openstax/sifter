@@ -60,6 +60,8 @@ window.addEventListener('load', () => {
     const sandboxEl = document.querySelector('#sandbox')
     const stopAfterOneEl = document.querySelector('#stop-after-one')
     const bookCountEl = document.querySelector('#book-count')
+    const analyzeToggleEl = document.querySelector('#analyze-toggle')
+    const analyzeCodeEl = document.querySelector('#analyze-code')
 
     bookCountEl.textContent = bookUuids.length
     
@@ -118,8 +120,10 @@ window.addEventListener('load', () => {
         // Remember if there was a match (maybe find the nearest id attribute)
 
         const selector = selectorEl.value
+        const analyzeFn = new Function('type', 'json', 'bookUuid', 'pageUuid', analyzeCodeEl.value)
+
         // update the URL so that folks can share their search
-        history.pushState(null, null, `#${encodeURIComponent(JSON.stringify({q: selector}))}`)
+        history.pushState(null, null, `#${encodeURIComponent(JSON.stringify({q: selector, code: analyzeCodeEl.value}))}`)
 
         // clear
         isStopping = false
@@ -153,6 +157,8 @@ window.addEventListener('load', () => {
             const bookUrl = `${serverRootUrl}/${bookUuid}`
             const bookJson = await fetchWithBackoff(bookUrl)
 
+            analyzeFn('BOOK:START', bookJson, bookUuid)
+
             bookTitleEl.textContent = bookJson.title
 
             const pageRefs = []
@@ -175,6 +181,7 @@ window.addEventListener('load', () => {
                 const pageUrl = `${bookUrl}:${pageRef.id}`
                 const pageJson = await fetchWithBackoff(pageUrl)
       
+                analyzeFn('PAGE', pageJson, pageRef.id, bookUuid)
                 
                 const matches = findMatches(selector, pageJson.content)
                 totalMatches += matches.length
@@ -198,7 +205,7 @@ window.addEventListener('load', () => {
                 }
 
             }
-                
+            analyzeFn('BOOK:END', bookJson, bookUuid)    
         }
 
         selectorEl.disabled = false
@@ -223,6 +230,10 @@ window.addEventListener('load', () => {
     if (window.location.hash.length > 1) {
         const state = JSON.parse(decodeURIComponent(window.location.hash.substring(1)))
         selectorEl.value = state.q
+        if (state.code) {
+            analyzeToggleEl.checked = true
+            analyzeCodeEl.value = state.code
+        }
         startFn()
     }
 

@@ -17,6 +17,8 @@
                 color: #888;
                 pointer-events: none;
             }
+
+            #advanced-toggle:not(:checked) + #advanced-area { display: none; }
         </style>
         <script src="./app.js"></script>
         <script>
@@ -37,8 +39,25 @@
             <button id="start">Start</button>
             <button id="stop" disabled="disabled">Stop</button>
             <button id="skip" disabled="disabled">Skip</button>
+            <br/>
             <label for="stop-after-one">Stop after one is found:</label>
             <input id="stop-after-one" type="checkbox" checked="checked"/>
+            <br/>
+            <label for="advanced-toggle">Run custom JavaScript for each Book/Page</label>
+            <input id="advanced-toggle" type="checkbox"/>
+            <div id="advanced-area">
+                <br/>
+                <p>The arguments available are:</p>
+                <ul>
+                    <li><strong>type</strong>: It is one of 'BOOK:START', 'PAGE', or 'BOOK:END'</li>
+                    <li><strong>json</strong></li>
+                    <li><strong>bookUuid</strong></li>
+                    <li><strong>pageUuid</strong> (if applicable)</li>
+                </ul>
+                <label for="analyze-code">Extra JS to run:</label>
+                <br/>
+                <textarea id="analyze-code" cols="80" rows="10"></textarea>
+            </div>
         </form>
         <ul id="results"></ul>
         <div id="sandbox"></div>
