@@ -11,18 +11,20 @@ This searches our books using any CSS selector! You can share the link with othe
 
 ## Examples
 
-- [Where do we use subscripts?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22sub%22%7D)
-- [Which content is marked `.unnumbered`](https://openstax.github.io/sifter/#%7B%22q%22%3A%22.unnumbered%22%7D)
-- [Do we even use the `<c:foreign>` tag?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22foreign%5C%22%5D%22%7D)
-- [Where are our footnotes?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Brole%3D%5C%22doc-footnote%5C%22%5D%22%7D)
-- [Does our content have a Note inside a Note?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22note%5C%22%5D%20%5Bdata-type%3D%5C%22note%5C%22%5D%22%7D)
+- [Where do we use subscripts?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=sub)
+- [Which content is marked `.unnumbered`](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=.unnumbered)
+- [Do we even use the `<c:foreign>` tag?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="foreign"])
+- [Where are our footnotes?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[role="doc-footnote"])
+- [Does our content have a Note inside a Note?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="note"]+[data-type="note"])
 - Links
-    - [What are all the external links?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22a%5Bhref%5E%3Dhttp%5D%22%7D)
-    - [Which links go to an unsecure site?](https://openstax.github.io/sifter/#%7B%22q%22%3A%22a%5Bhref%5E%3D%5C%22http%3A%5C%22%5D%22%7D)
+    - [What are all the external links?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=a[href%5E=http])
+    - [Which links go to an unsecure site?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=a[href%5E="http%3A"])
 - Exercises with Solutions...
-    - ... [in the content](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22exercise%5C%22%5D%20%5Bdata-type%3D%5C%22solution%5C%22%5D%22%7D) (e.g. an Example Exercise)
-    - ... [at the back of the book](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%5Bdata-type%3D%5C%22exercise%5C%22%5D%20%5Bdata-type%3D%5C%22problem%5C%22%5D%20%3E%20a.os-number%22%7D)
-- **XPath:** [Exercises with Solutions at the back of the book](https://openstax.github.io/sifter/#%7B%22q%22%3A%22%2F%2Fh%3A*%5B%40data-type%3D%5C%22exercise%5C%22%5D%5Bh%3A*%5B%40data-type%3D%5C%22problem%5C%22%5D%5Bh%3Aa%5B%40class%3D'os-number'%5D%5D%5D%22%7D)
+    - ... [in the content](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="exercise"]+[data-type="solution"]) (e.g. an Example Exercise)
+    - ... [at the back of the book](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="exercise"]+[data-type="problem"]+>+a.os-number)
+- **XPath:** 
+    - [Exercises with Solutions at the back of the book](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=%2F%2Fh%3A*[%40data-type="exercise"][h%3A*[%40data-type="problem"][h%3Aa[%40class=%27os-number%27]]])
+    - [Invalid number of children in msubsup](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=//m%3Amsubsup[count(*)!=3])
 
 # Screencap
 
@@ -38,3 +40,17 @@ It runs in your browser and pulls content from archive-staging.
 > So, are you saying the next time I'm ice-climbing in the Himalayas or free-soloing El Capitan I can find out which books have subfigures in them?
 
 ### Absolutely!
+
+
+## Development
+
+1. clone this repository and switch to this directory
+1. start a little static webserver by running `python -m SimpleHTTPServer 8080`
+1. visit http://localhost:8080/
+
+
+## ToDone
+
+- [x] Search CNXML
+- [ ] Select subset of books to search
+- [ ] Change which server to get content from (currently archive-staging)

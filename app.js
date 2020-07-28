@@ -1,5 +1,15 @@
 window.addEventListener('load', () => {
     const serverRootUrl = 'https://archive-staging.cnx.org/contents'
+    const legacyRoot = 'https://legacy.cnx.org/content'
+    const namespacePrefixes = {
+        'c'     : 'http://cnx.rice.edu/cnxml',
+        'cnx'   : 'http://cnx.rice.edu/cnxml',
+        'h'     : 'http://www.w3.org/1999/xhtml',
+        'xhtml' : 'http://www.w3.org/1999/xhtml',
+        'm'     : 'http://www.w3.org/1998/Math/MathML',
+        'mml'   : 'http://www.w3.org/1998/Math/MathML',
+        'mathml': 'http://www.w3.org/1998/Math/MathML'
+    }
     const bookUuids = [
         /* Algebra & Trigonometry */ '13ac107a-f15f-49d2-97e8-60ab2e3b519c',
         /* Am Gov 2e */ '9d8df601-4f12-4ac1-8224-b450bf739e5f',
@@ -62,6 +72,8 @@ window.addEventListener('load', () => {
     const bookCountEl = document.querySelector('#book-count')
     const analyzeToggleEl = document.querySelector('#analyze-toggle')
     const analyzeCodeEl = document.querySelector('#analyze-code')
+    const form = document.querySelector('form')
+    const sourceFormat = form.elements['sourceFormat']
 
     bookCountEl.textContent = bookUuids.length
     
@@ -74,43 +86,59 @@ window.addEventListener('load', () => {
         for (var i = 0; i < x; i++)
             yield i;
     }
-    async function fetchWithBackoff(url) {
+    async function fetchWithBackoff(url, useJson) {
         for (var _ of times(3)) {
             try {
-                return fetchJson(url)
+                if (useJson) {
+                    return fetchJson(url)
+                } else {
+                    return fetchText(url)
+                }
             } catch (err) {
             }
             await sleep(300)
         }
-        return fetchJson(url)
+        if (useJson) {
+            return fetchJson(url)
+        } else {
+            return fetchText(url)
+        }
     }
     const fetchJson = async (url) => (await fetch(url)).json() 
+    const fetchText = async (url) => (await fetch(url)).text() 
 
-    const validateSelector = () => {
+    let isValid = false
+    const getValidationMessage = () => {
+        if (sourceFormat.value !== 'xhtml' && sourceFormat.value !== 'cnxml') {
+            return 'Choose a format to search: XHTML or CNXML'
+        }
         const selector = selectorEl.value
         // Try validating this as a CSS selector
         try {
             document.querySelector(selector)
-            selectorEl.setCustomValidity('') // valid!
-            return
+            return '' // valid!
         } catch (e) {
             // validate it as an XPath (ensure it begins with "/h:")
-            if (/^\/h:/.test(selector) || /^\/\/h:/.test(selector) || /^\/\/m:/.test(selector)) {
+            if (/^\/[h,c,m]:/.test(selector) || /^\/\/[h,c,m]:/.test(selector)) {
                 try {
                     document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
-                    selectorEl.setCustomValidity('') // valid!
-                    return
+                    return '' // valid!
                 } catch (e) { }
             }
         }
-        selectorEl.setCustomValidity("Enter a valid CSS selector or XPath selector. In the case of an XPath selector, ensure that it begins with / and that all elements are prefixed with h: or m:")
+        return "Enter a valid CSS selector or XPath selector. In the case of an XPath selector, ensure that it begins with / and that all elements are prefixed with h: or m: or c:"
+    }
+    const validateSelector = () => {
+        const msg = getValidationMessage()
+        selectorEl.setCustomValidity(msg)
+        isValid = !msg
     }
     selectorEl.addEventListener('input', validateSelector)
-    selectorEl.addEventListener('blur', validateSelector)
     selectorEl.addEventListener('keyup', validateSelector)
+    form.addEventListener('change', validateSelector)
 
-    skipEl.addEventListener('click', () => isSkipping = true)
-    stopEl.addEventListener('click', () => isStopping = true)
+    skipEl.addEventListener('click', (e) => { e.preventDefault(); isSkipping = true } )
+    stopEl.addEventListener('click', (e) => { e.preventDefault(); isStopping = true } )
     const startFn = async () => {
         // For each book, fetch the ToC
         // Fetch each Page
@@ -121,9 +149,6 @@ window.addEventListener('load', () => {
 
         const selector = selectorEl.value
         const analyzeFn = new Function('type', 'json', 'bookUuid', 'pageUuid', analyzeCodeEl.value)
-
-        // update the URL so that folks can share their search
-        history.pushState(null, null, `#${encodeURIComponent(JSON.stringify({q: selector, code: analyzeCodeEl.value}))}`)
 
         // clear
         isStopping = false
@@ -155,7 +180,7 @@ window.addEventListener('load', () => {
             resultsEl.prepend(t1)
 
             const bookUrl = `${serverRootUrl}/${bookUuid}`
-            const bookJson = await fetchWithBackoff(bookUrl)
+            const bookJson = await fetchWithBackoff(bookUrl, true)
 
             analyzeFn('BOOK:START', bookJson, bookUuid)
 
@@ -165,25 +190,25 @@ window.addEventListener('load', () => {
             recLeafPages(pageRefs, bookJson.tree)
     
             for (const pageRef of pageRefs) {
-                // Break when stop button is pressed
-                if (isStopping) {
-                    selectorEl.disabled = false
-                    startEl.disabled = false
-                    stopEl.disabled = true
-                    skipEl.disabled = true
-                    return
-                }
-                if (isSkipping) {
-                    break
-                }
                 const i = pageRefs.indexOf(pageRef)
     
                 const pageUrl = `${bookUrl}:${pageRef.id}`
-                const pageJson = await fetchWithBackoff(pageUrl)
+                const pageJson = await fetchWithBackoff(pageUrl, true)
       
                 analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
                 
-                const matches = findMatches(selector, pageJson.content)
+                let sourceCode
+                if (sourceFormat.value === 'cnxml') {
+                    const moduleResource = pageJson.resources.filter(r => r.filename === 'index.cnxml')[0]
+                    if (!moduleResource) { 
+                        continue
+                    }
+                    sourceCode = await fetchWithBackoff(`https://archive-staging.cnx.org/resources/${moduleResource.id}`, false)
+                    sourceCode = sourceCode.replace('<?xml version="1.0"?>', '')
+                } else {
+                    sourceCode = pageJson.content
+                }
+                const matches = findMatches(selector, sourceCode)
                 totalMatches += matches.length
                 bookLogEl.textContent = `(${i + 1}/${pageRefs.length}. Found ${totalMatches})`
     
@@ -195,7 +220,8 @@ window.addEventListener('load', () => {
                     const typeOfEl = findTypeOfEl(match)
     
                     const li = document.createElement('li')
-                    li.innerHTML = `${pageJson.title} <a href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
+                    const moduleInfo = pageJson.legacy_id ? `<a href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : ''
+                    li.innerHTML = `${moduleInfo}${pageJson.title} <a href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
                     bookResultsEl.append(li)
                 }
 
@@ -204,6 +230,18 @@ window.addEventListener('load', () => {
                     isSkipping = true
                 }
 
+                // Break when stop button is pressed
+                if (isStopping) {
+                    selectorEl.disabled = false
+                    startEl.disabled = false
+                    stopEl.disabled = true
+                    skipEl.disabled = true
+                    return
+                }
+                if (isSkipping) {
+                    break
+                }
+                
             }
             analyzeFn('BOOK:END', bookJson, bookUuid)    
         }
@@ -214,17 +252,6 @@ window.addEventListener('load', () => {
         skipEl.disabled = true
 
     }
-    startEl.addEventListener('click', async () => {
-        try {
-            await startFn()
-        } catch (err) {
-            alert(err.message)
-            selectorEl.disabled = false
-            startEl.disabled = false
-            stopEl.disabled = true
-            skipEl.disabled = true
-        }
-    })
 
     // load the form from the URL
     if (window.location.hash.length > 1) {
@@ -234,8 +261,31 @@ window.addEventListener('load', () => {
             analyzeToggleEl.checked = true
             analyzeCodeEl.value = state.code
         }
-        startFn()
+        validateSelector()
     }
+    if (window.location.search.length > 1) {
+        const args = querystring(window.location.search.substring(1))
+        for (const el of form.elements) {
+            const key = el.name
+            if (args[key]) {
+                form.elements[key].value = args[key]
+            }
+        }
+        validateSelector()
+    }
+
+    // Run!
+    if (isValid) {
+        startFn().then(null, (err) => {
+            console.error(err.message)
+            alert(`Error: ${err.message}`)
+            selectorEl.disabled = false
+            startEl.disabled = false
+            stopEl.disabled = true
+            skipEl.disabled = true
+        })
+    }
+
 
     function recLeafPages(acc, node) {
         if (node.contents) {
@@ -247,15 +297,8 @@ window.addEventListener('load', () => {
 
     // https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#Implementing_a_User_Defined_Namespace_Resolver
     function xpathNamespaceResolver(prefix) {
-        var ns = {
-            'h'     : 'http://www.w3.org/1999/xhtml',
-            'xhtml' : 'http://www.w3.org/1999/xhtml',
-            'm'     : 'http://www.w3.org/1998/Math/MathML',
-            'mml'   : 'http://www.w3.org/1998/Math/MathML',
-            'mathml': 'http://www.w3.org/1998/Math/MathML'
-        }
-        if (ns[prefix]) {
-            return ns[prefix]
+        if (namespacePrefixes[prefix]) {
+            return namespacePrefixes[prefix]
         } else {
             alert('Invalid namespace prefix. Use "h:" or "xhtml:" or "m:" or "mathml:" .')
             throw new Error(`Invalid namespace prefix "${prefix}"`)
@@ -272,7 +315,7 @@ window.addEventListener('load', () => {
         } catch (err) {
             // Verify that the Xpath selector begins with "/h:" or "//h:" or "//m:"
             // See https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#Implementing_a_User_Defined_Namespace_Resolver
-            if (/^\/h:/.test(selector) || /^\/\/h:/.test(selector) || /^\/\/m:/.test(selector)) {
+            if (/^\/[h,c,m]:/.test(selector) || /^\/\/[h,c,m]:/.test(selector)) {
                 const xpathResult = document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
                 const ret = []
                 for (let i = 0; i < xpathResult.snapshotLength; i++) {
@@ -280,7 +323,7 @@ window.addEventListener('load', () => {
                 }
                 return ret
             } else {
-                alert('What you entered is an invalid CSS selector and an invalid XPath selector. If you are trying to use XPath, all elements must be prefixed with either an `h:` or `m:`')
+                alert('What you entered is an invalid CSS selector and an invalid XPath selector. If you are trying to use XPath, all elements must be prefixed with either an `h:` or `m:` or `c:` ')
                 throw new Error(`Invalid selector: "${selector}"`)
             }
         }
@@ -303,4 +346,57 @@ window.addEventListener('load', () => {
         return tagName
     }
 
+    function hasOwnProperty(obj, prop) {
+        return Object.prototype.hasOwnProperty.call(obj, prop);
+    }
+    function querystring(qs, sep, eq, options) {
+        sep = sep || '&';
+        eq = eq || '=';
+        var obj = {};
+      
+        if (typeof qs !== 'string' || qs.length === 0) {
+          return obj;
+        }
+      
+        var regexp = /\+/g;
+        qs = qs.split(sep);
+      
+        var maxKeys = 1000;
+        if (options && typeof options.maxKeys === 'number') {
+          maxKeys = options.maxKeys;
+        }
+      
+        var len = qs.length;
+        // maxKeys <= 0 means that we should not limit keys count
+        if (maxKeys > 0 && len > maxKeys) {
+          len = maxKeys;
+        }
+      
+        for (var i = 0; i < len; ++i) {
+          var x = qs[i].replace(regexp, '%20'),
+              idx = x.indexOf(eq),
+              kstr, vstr, k, v;
+      
+          if (idx >= 0) {
+            kstr = x.substr(0, idx);
+            vstr = x.substr(idx + 1);
+          } else {
+            kstr = x;
+            vstr = '';
+          }
+      
+          k = decodeURIComponent(kstr);
+          v = decodeURIComponent(vstr);
+      
+          if (!hasOwnProperty(obj, k)) {
+            obj[k] = v;
+          } else if (Array.isArray(obj[k])) {
+            obj[k].push(v);
+          } else {
+            obj[k] = [obj[k], v];
+          }
+        }
+      
+        return obj;
+      }
 })
