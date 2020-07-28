@@ -12,7 +12,7 @@ ancestor, descendant, parent, sibling, child (aka direct descendant)
 - Namespace identifies what the meaning of the element is... `<p>` could mean paragraph or part number
 
 
-# Lanugages: CSS and Xpath
+# Languages: CSS and Xpath
 
 ## CSS
 

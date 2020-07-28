@@ -113,20 +113,24 @@ window.addEventListener('load', () => {
             return 'Choose a format to search: XHTML or CNXML'
         }
         const selector = selectorEl.value
-        // Try validating this as a CSS selector
-        try {
-            document.querySelector(selector)
-            return '' // valid!
-        } catch (e) {
+        if (selector[0] === '/') {
             // validate it as an XPath (ensure it begins with "/h:")
             if (/^\/[h,c,m]:/.test(selector) || /^\/\/[h,c,m]:/.test(selector)) {
                 try {
                     document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
                     return '' // valid!
-                } catch (e) { }
+                } catch (e) {
+                    return 'Malformed XPath selector'
+                }
             }
         }
-        return "Enter a valid CSS selector or XPath selector. In the case of an XPath selector, ensure that it begins with / and that all elements are prefixed with h: or m: or c:"
+        // Try validating this as a CSS selector
+        try {
+            document.querySelector(selector)
+            return '' // valid!
+        } catch (e) {
+            return 'Malformed CSS selector'
+        }
     }
     const validateSelector = () => {
         const msg = getValidationMessage()
@@ -309,10 +313,8 @@ window.addEventListener('load', () => {
         html = html.replace(/ src=/g, ' data-src=')
         
         sandboxEl.innerHTML = html
-        // Try running the selector as CSS, and then as XPath
-        try {
-            return [...sandboxEl.querySelectorAll(selector)]
-        } catch (err) {
+        // Try running the selector as CSS or XPath depending on the 1st character ('/' for XPath)
+        if (selector[0] === '/') {
             // Verify that the Xpath selector begins with "/h:" or "//h:" or "//m:"
             // See https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#Implementing_a_User_Defined_Namespace_Resolver
             if (/^\/[h,c,m]:/.test(selector) || /^\/\/[h,c,m]:/.test(selector)) {
@@ -323,9 +325,16 @@ window.addEventListener('load', () => {
                 }
                 return ret
             } else {
-                alert('What you entered is an invalid CSS selector and an invalid XPath selector. If you are trying to use XPath, all elements must be prefixed with either an `h:` or `m:` or `c:` ')
-                throw new Error(`Invalid selector: "${selector}"`)
+                alert('Malformed XPath selector. All elements must be prefixed with either an `h:` or `m:` or `c:` ')
+                throw new Error(`Malformed selector: "${selector}"`)
             }
+        } else {
+            try {
+                return [...sandboxEl.querySelectorAll(selector)]
+            } catch (err) {
+                alert('Malformed CSS selector. Try again.')
+                throw new Error(`Malformed selector: "${selector}"`)
+            }    
         }
     }
 
