@@ -224,8 +224,8 @@ window.addEventListener('load', () => {
                     const typeOfEl = findTypeOfEl(match)
     
                     const li = document.createElement('li')
-                    const moduleInfo = pageJson.legacy_id ? `<a href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : ''
-                    li.innerHTML = `${moduleInfo}${pageJson.title} <a href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
+                    const moduleInfo = pageJson.legacy_id ? `<a target="_blank" href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : ''
+                    li.innerHTML = `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
                     bookResultsEl.append(li)
                 }
 
