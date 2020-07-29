@@ -11,20 +11,20 @@ This searches our books using any CSS selector! You can share the link with othe
 
 ## Examples
 
-- [Where do we use subscripts?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=sub)
-- [Which content is marked `.unnumbered`](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=.unnumbered)
-- [Do we even use the `<c:foreign>` tag?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="foreign"])
-- [Where are our footnotes?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[role="doc-footnote"])
-- [Does our content have a Note inside a Note?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="note"]+[data-type="note"])
+- [Where do we use subscripts?](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=sub)
+- [Which content is marked `.unnumbered`](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=.unnumbered)
+- [Do we even use the `<c:foreign>` tag?](https://openstax.github.io/sifter/?v=1&sourceFormat=cnxml&q=//c:foreign)
+- [Where are our footnotes?](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=[role="doc-footnote"])
+- [Does our content have a Note inside a Note?](https://openstax.github.io/sifter/?v=1&sourceFormat=cnxml&q=//c:note//c:note)
 - Links
-    - [What are all the external links?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=a[href%5E=http])
-    - [Which links go to an unsecure site?](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=a[href%5E="http%3A"])
+    - [What are all the external links?](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=a[href%5E=http])
+    - [Which links go to an unsecure site?](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=a[href%5E="http%3A"])
 - Exercises with Solutions...
-    - ... [in the content](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="exercise"]+[data-type="solution"]) (e.g. an Example Exercise)
-    - ... [at the back of the book](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=[data-type="exercise"]+[data-type="problem"]+>+a.os-number)
+    - ... [in the content](https://openstax.github.io/sifter/?v=1&sourceFormat=cnxml&q=//c:exercise//c:solution) (e.g. an Example Exercise)
+    - ... [at the back of the book](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=[data-type="exercise"]+[data-type="problem"]+>+a.os-number)
 - **XPath:** 
-    - [Exercises with Solutions at the back of the book](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=%2F%2Fh%3A*[%40data-type="exercise"][h%3A*[%40data-type="problem"][h%3Aa[%40class=%27os-number%27]]])
-    - [Invalid number of children in msubsup](https://openstax.github.io/sifter/?v=1&one=on&code=&sourceFormat=xhtml&q=//m%3Amsubsup[count(*)!=3])
+    - [Exercises with Solutions at the back of the book](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=%2F%2Fh%3A*[%40data-type="exercise"][h%3A*[%40data-type="problem"][h%3Aa[%40class=%27os-number%27]]])
+    - [Invalid number of children in msubsup](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=//m%3Amsubsup[count(*)!=3])
 
 # Screencap
 
