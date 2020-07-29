@@ -11,6 +11,8 @@ This searches our books using any CSS selector! You can share the link with othe
 
 ## Examples
 
+Knowledge of CSS selectors or XPath selectors is required for searching. See [Help](./help.md) for a quick reference and links to more comprehensive documentation.
+
 - [Where do we use subscripts?](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=sub)
 - [Which content is marked `.unnumbered`](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=.unnumbered)
 - [Do we even use the `<c:foreign>` tag?](https://openstax.github.io/sifter/?v=1&sourceFormat=cnxml&q=//c:foreign)
