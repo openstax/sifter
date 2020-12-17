@@ -11,12 +11,12 @@ window.addEventListener('load', () => {
         'mathml': 'http://www.w3.org/1998/Math/MathML'
     }
     const bookUuids = [
+        /* Biology for AP Courses */ '6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2',
         /* Algebra & Trigonometry */ '13ac107a-f15f-49d2-97e8-60ab2e3b519c',
         /* Am Gov 2e */ '9d8df601-4f12-4ac1-8224-b450bf739e5f',
         /* Anatomy & Physiology */ '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22',
         /* Astronomy */ '2e737be8-ea65-48c3-aa0a-9f35b4c6a966',
         /* Biology 2e */ '8d50a0af-948b-4204-a71d-4826cba765b8',
-        /* Biology for AP Courses */ '6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2',
         /* Business Ethics */ '914ac66e-e1ec-486d-8a9c-97b0f7a99774',
         /* Business statistics */ 'b56bb9e9-5eb8-48ef-9939-88b1b12ce22f',
         /* Business in Law I */ '464a3fba-68c1-426a-99f9-597e739dc911',
@@ -62,17 +62,23 @@ window.addEventListener('load', () => {
 
     ]
 
-    const selectorEl = document.querySelector('#selector')
-    const startEl = document.querySelector('#start')
-    const stopEl = document.querySelector('#stop')
-    const skipEl = document.querySelector('#skip')
-    const resultsEl = document.querySelector('#results')
-    const sandboxEl = document.querySelector('#sandbox')
-    const stopAfterOneEl = document.querySelector('#stop-after-one')
-    const bookCountEl = document.querySelector('#book-count')
-    const analyzeToggleEl = document.querySelector('#analyze-toggle')
-    const analyzeCodeEl = document.querySelector('#analyze-code')
-    const form = document.querySelector('form')
+    const qs = (sel) => {
+        const el = document.querySelector(sel)
+        if (!el) { throw new Error(`BUG: Could not find "${sel}"`) }
+        return el
+    }
+
+    const selectorEl = qs('#selector')
+    const startEl = qs('#start')
+    const stopEl = qs('#stop')
+    const skipEl = qs('#skip')
+    const resultsEl = qs('#results')
+    const sandboxEl = qs('#sandbox')
+    const stopAfterOneEl = qs('#stop-after-one')
+    const bookCountEl = qs('#book-count')
+    const analyzeCodeEl = qs('#analyze-code')
+    const stopAfterNPages = qs('#stop-after-n-pages')
+    const form = qs('form')
     const sourceFormat = form.elements['sourceFormat']
 
     bookCountEl.textContent = bookUuids.length
@@ -195,6 +201,15 @@ window.addEventListener('load', () => {
     
             for (const pageRef of pageRefs) {
                 const i = pageRefs.indexOf(pageRef)
+
+                // Check this in the loop so that users can update the value while this is running
+                let stopAfterNPagesCount = Number.parseInt(stopAfterNPages.value)
+                if (Number.isNaN(stopAfterNPagesCount)) {
+                    stopAfterNPagesCount = Number.POSITIVE_INFINITY
+                }
+                if (i >= stopAfterNPagesCount) {
+                    break
+                }
     
                 const pageUrl = `${bookUrl}:${pageRef.id}`
                 const pageJson = await fetchWithBackoff(pageUrl, true)
@@ -262,7 +277,6 @@ window.addEventListener('load', () => {
         const state = JSON.parse(decodeURIComponent(window.location.hash.substring(1)))
         selectorEl.value = state.q
         if (state.code) {
-            analyzeToggleEl.checked = true
             analyzeCodeEl.value = state.code
         }
         validateSelector()
