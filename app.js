@@ -11,11 +11,11 @@ window.addEventListener('load', () => {
         'mathml': 'http://www.w3.org/1998/Math/MathML'
     }
     const bookUuids = [
-        /* Biology for AP Courses */ '6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2',
         /* Algebra & Trigonometry */ '13ac107a-f15f-49d2-97e8-60ab2e3b519c',
         /* Am Gov 2e */ '9d8df601-4f12-4ac1-8224-b450bf739e5f',
         /* Anatomy & Physiology */ '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22',
         /* Astronomy */ '2e737be8-ea65-48c3-aa0a-9f35b4c6a966',
+        /* Biology for AP Courses */ '6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2',
         /* Biology 2e */ '8d50a0af-948b-4204-a71d-4826cba765b8',
         /* Business Ethics */ '914ac66e-e1ec-486d-8a9c-97b0f7a99774',
         /* Business statistics */ 'b56bb9e9-5eb8-48ef-9939-88b1b12ce22f',
@@ -236,11 +236,11 @@ window.addEventListener('load', () => {
                     detailsEl.classList.add('found-matches')
 
                     const nearestId = findNearestId(match)
-                    const typeOfEl = findTypeOfEl(match)
+                    const nodeValue = getNodeValue(match)
     
                     const li = document.createElement('li')
                     const moduleInfo = pageJson.legacy_id ? `<a target="_blank" href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : ''
-                    li.innerHTML = `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${typeOfEl}</a>`
+                    li.innerHTML = `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${nodeValue}</a>`
                     bookResultsEl.append(li)
                 }
 
@@ -354,19 +354,31 @@ window.addEventListener('load', () => {
 
     function findNearestId(el) {
         if (!el || el === sandboxEl) { return '' }
-        const id = el.getAttribute('id')
-        return id ? id : findNearestId(el.parentElement)
+        return (el.getAttribute && el.getAttribute('id')) || findNearestId(el.parentElement)
     }
 
+    function getNodeValue(node) {
+        switch (node.nodeType) {
+            case Node.ATTRIBUTE_NODE: 
+                return node.value
+            default: return findTypeOfEl(node)
+        }
+    }
+
+
     function findTypeOfEl(el) {
-        const type = el.getAttribute('data-type')
-        const cls = el.getAttribute('class')
-        const id = el.getAttribute('id')
-        const tagName = el.tagName
-        if (type) { return type }
-        if (cls) { return `${tagName}.${cls}`}
-        if (id) { return `${tagName}#${id}`}
-        return tagName
+        if (el.getAttribute) {
+            const type = el.getAttribute('data-type')
+            const cls = el.getAttribute('class')
+            const id = el.getAttribute('id')
+            const tagName = el.tagName
+            if (type) { return type }
+            if (cls) { return `${tagName}.${cls}`}
+            if (id) { return `${tagName}#${id}`}
+            return tagName
+        } else {
+            return findTypeOfEl(el.parentElement)
+        }
     }
 
     function hasOwnProperty(obj, prop) {

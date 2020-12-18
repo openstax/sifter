@@ -27,6 +27,7 @@ Knowledge of CSS selectors or XPath selectors is required for searching. See [He
 - **XPath:** 
     - [Exercises with Solutions at the back of the book](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=%2F%2Fh%3A*[%40data-type="exercise"][h%3A*[%40data-type="problem"][h%3Aa[%40class=%27os-number%27]]])
     - [Invalid number of children in msubsup](https://openstax.github.io/sifter/?v=1&sourceFormat=xhtml&q=//m%3Amsubsup[count(*)!=3])
+    - [The URL of all links containing the term openstaxcollege](https://openstax.github.io/sifter/?v=1&q=%2F%2Fh%3Aa[contains(%40href%2C+'openstaxcollege')]%2F%40href&code=&sourceFormat=xhtml)
 
 # Screencap
 
