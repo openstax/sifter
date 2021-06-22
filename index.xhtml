@@ -19,6 +19,8 @@
             }
 
             #advanced-toggle:not(:checked) + #advanced-area { display: none; }
+
+            #validation-message { font-weight: bold; color: red; }
         </style>
         <script src="./app.js"></script>
         <script>
@@ -32,10 +34,11 @@
     </head>
     <body>
         <h1>Bulk Content Search</h1>
-        <p>This searches most of our books (<span id="book-count"></span>) for content by loading the books in your browser. The first time is slow but once the books are loaded searches are really fast.</p>
+        <p>This searches most of our books (<a id="book-count">???</a>) for content by loading the books in your browser. The first time is slow but once the books are loaded searches are really fast.</p>
         <p><a target="_blank" href="https://github.com/openstax/sifter">Source</a>. <a target="_blank" href="./help">Help</a></p>
-        <form method="GET">
+        <form>
             <input type="hidden" name="v" value="1"/>
+            <div id="validation-message"></div>
             <input name="q" id="selector" placeholder="CSS or XPath (//h:*) Selector"/>
             <button type="submit" id="start">Start</button>
             <button id="stop" disabled="disabled">Stop</button>
@@ -66,6 +69,9 @@
                 <li><input type="radio" id="use-xhtml" name="sourceFormat" value="xhtml"/><label for="use-xhtml">Search XHTML</label></li>
                 <li><input type="radio" id="use-cnxml" name="sourceFormat" value="cnxml"/><label for="use-cnxml">Search CNXML</label></li>
             </ul>
+            <label for="books">Books to search:</label>
+            <br/>
+            <select id="books" name="books" multiple="multiple" size="10"></select>
         </form>
         <ul id="results"></ul>
         <div id="sandbox"></div>

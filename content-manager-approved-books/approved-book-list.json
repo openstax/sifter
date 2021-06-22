@@ -1,0 +1,1421 @@
+{
+    "approved_books": [
+      {
+        "collection_id": "col12006",
+        "server": "cnx.org",
+        "style": "college-physics",
+        "tutor_only": true,
+        "books": [
+          {
+            "uuid": "405335a3-7cff-4df2-a9ad-29062a4af261",
+            "slug": "college-physics-courseware"
+          }
+        ]
+      },
+      {
+        "collection_id": "col31596",
+        "server": "cnx.org",
+        "style": "ap-history",
+        "tutor_only": true,
+        "books": [
+          {
+            "uuid": "36004586-651c-4ded-af87-203aca22d946",
+            "slug": "life-liberty-and-pursuit-happiness"
+          }
+        ]
+      },
+      {
+        "collection_id": "col32565",
+        "server": "cnx.org",
+        "style": "pl-psychology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "728df0bb-e07f-489d-91e3-4734a5932f92",
+            "slug": "Psychologia"
+          }
+        ]
+      },
+      {
+        "collection_id": "col23946",
+        "server": "cnx.org",
+        "style": "pl-u-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "4eaa8f03-88a8-485a-a777-dd3602f6c13e",
+            "slug": "fizyka-dla-szkół-wyższych-tom-1"
+          }
+        ]
+      },
+      {
+        "collection_id": "col25244",
+        "server": "cnx.org",
+        "style": "pl-u-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "16ab5b96-4598-45f9-993c-b8d78d82b0c6",
+            "slug": "fizyka-dla-szkół-wyższych-tom-2"
+          }
+        ]
+      },
+      {
+        "collection_id": "col25571",
+        "server": "cnx.org",
+        "style": "pl-u-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "bb62933e-f20a-4ffc-90aa-97b36c296c3e",
+            "slug": "fizyka-dla-szkół-wyższych-tom-3"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11758",
+        "server": "cnx.org",
+        "style": "precalculus",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "13ac107a-f15f-49d2-97e8-60ab2e3b519c",
+            "slug": "algebra-and-trigonometry"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11995",
+        "server": "cnx.org",
+        "style": "american-government",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "5bcc0e59-7345-421d-8507-a1e4608685e8",
+            "slug": "american-government"
+          }
+        ]
+      },
+      {
+        "collection_id": "col26739",
+        "server": "cnx.org",
+        "style": "american-government",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "9d8df601-4f12-4ac1-8224-b450bf739e5f",
+            "slug": "american-government-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11496",
+        "server": "cnx.org",
+        "style": "anatomy",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22",
+            "slug": "anatomy-and-physiology"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11992",
+        "server": "cnx.org",
+        "style": "astronomy",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "2e737be8-ea65-48c3-aa0a-9f35b4c6a966",
+            "slug": "astronomy"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11448",
+        "server": "cnx.org",
+        "style": "biology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "185cbf87-c72e-48f5-b51e-f14f21b5eabd",
+            "slug": "biology"
+          }
+        ]
+      },
+      {
+        "collection_id": "col24361",
+        "server": "cnx.org",
+        "style": "biology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "8d50a0af-948b-4204-a71d-4826cba765b8",
+            "slug": "biology-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12078",
+        "server": "cnx.org",
+        "style": "ap-biology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2",
+            "slug": "biology-ap-courses"
+          }
+        ]
+      },
+      {
+        "collection_id": "col25722",
+        "server": "cnx.org",
+        "style": "business-ethics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "914ac66e-e1ec-486d-8a9c-97b0f7a99774",
+            "slug": "business-ethics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col30149",
+        "server": "cnx.org",
+        "style": "business-ethics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "464a3fba-68c1-426a-99f9-597e739dc911",
+            "slug": "business-law-i-essentials"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11964",
+        "server": "cnx.org",
+        "style": "calculus",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "8b89d172-2927-466f-8661-01abc7ccdba4",
+            "slug": "calculus-volume-1"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11965",
+        "server": "cnx.org",
+        "style": "calculus",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "1d39a348-071f-4537-85b6-c98912458c3c",
+            "slug": "calculus-volume-2"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11966",
+        "server": "cnx.org",
+        "style": "calculus",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "a31cd793-2162-4e9e-acb5-6e6bbd76a5fa",
+            "slug": "calculus-volume-3"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11760",
+        "server": "cnx.org",
+        "style": "chemistry",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "85abf193-2bd2-4908-8563-90b8a7ac8df6",
+            "slug": "chemistry"
+          }
+        ]
+      },
+      {
+        "collection_id": "col26069",
+        "server": "cnx.org",
+        "style": "chemistry",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "7fccc9cf-9b71-44f6-800b-f9457fd64335",
+            "slug": "chemistry-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col26488",
+        "server": "cnx.org",
+        "style": "chemistry",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "d9b85ee6-c57f-4861-8208-5ddf261e9c5f",
+            "slug": "chemistry-atoms-first-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12012",
+        "server": "cnx.org",
+        "style": "chemistry",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "4539ae23-1ccc-421e-9b25-843acbb6c4b0",
+            "slug": "chemistry-atoms-first"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11759",
+        "server": "cnx.org",
+        "style": "precalculus",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "9b08c294-057f-4201-9f48-5d6ad992740d",
+            "slug": "college-algebra"
+          }
+        ]
+      },
+      {
+        "collection_id": "col32026",
+        "server": "cnx.org",
+        "style": "precalculus-coreq",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "507feb1e-cfff-4b54-bc07-d52636cecfe3",
+            "slug": "college-algebra-corequisite-support"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11406",
+        "server": "cnx.org",
+        "style": "college-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "031da8d3-b525-429c-80cf-6c8ed997733a",
+            "slug": "college-physics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11844",
+        "server": "cnx.org",
+        "style": "ap-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "8d04a686-d5e8-4798-a27d-c608e4d0e187",
+            "slug": "college-physics-ap-courses"
+          }
+        ]
+      },
+      {
+        "collection_id": "col30990",
+        "server": "cnx.org",
+        "style": "college-success",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "e8668a14-9a7d-4d74-b58c-3681f8351224",
+            "slug": "college-success"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11487",
+        "server": "cnx.org",
+        "style": "biology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "b3c1e1d2-839c-42b0-a314-e119a8aafbdd",
+            "slug": "concepts-biology"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12116",
+        "server": "cnx.org",
+        "style": "dev-math",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "0889907c-f0ef-496a-bcb8-2a5bb121717f",
+            "slug": "elementary-algebra"
+          }
+        ]
+      },
+      {
+        "collection_id": "col31130",
+        "server": "cnx.org",
+        "style": "dev-math",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "55931856-c627-418b-a56f-1dd0007683a8",
+            "slug": "elementary-algebra-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col29104",
+        "server": "cnx.org",
+        "style": "entrepreneurship",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "d380510e-6145-4625-b19a-4fa68204b6b1",
+            "slug": "entrepreneurship"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12119",
+        "server": "cnx.org",
+        "style": "dev-math",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "02776133-d49d-49cb-bfaa-67c7f61b25a1",
+            "slug": "intermediate-algebra"
+          }
+        ]
+      },
+      {
+        "collection_id": "col31234",
+        "server": "cnx.org",
+        "style": "dev-math",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "4664c267-cd62-4a99-8b28-1cb9b3aee347",
+            "slug": "intermediate-algebra-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col25734",
+        "server": "cnx.org",
+        "style": "intro-business",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "4e09771f-a8aa-40ce-9063-aa58cc24e77f",
+            "slug": "introduction-business"
+          }
+        ]
+      },
+      {
+        "collection_id": "col32642",
+        "server": "cnx.org",
+        "style": "business-ethics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "1b4ee0ce-ee89-44fa-a5e7-a0db9f0c94b1",
+            "slug": "introduction-intellectual-property"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11407",
+        "server": "cnx.org",
+        "style": "sociology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "afe4332a-c97f-4fc4-be27-4e4d384a32d8",
+            "slug": "introduction-sociology"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11762",
+        "server": "cnx.org",
+        "style": "sociology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "02040312-72c8-441e-a685-20e9333f3e1d",
+            "slug": "introduction-sociology-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col32649",
+        "server": "cnx.org",
+        "style": "sociology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "746f171e-0d6a-4ef2-b69d-367880872f4a",
+            "slug": "introduction-to-sociology-3e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11776",
+        "server": "cnx.org",
+        "style": "statistics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "b56bb9e9-5eb8-48ef-9939-88b1b12ce22f",
+            "slug": "introductory-business-statistics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11562",
+        "server": "cnx.org",
+        "style": "statistics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "30189442-6998-4686-ac05-ed152b91b9de",
+            "slug": "introductory-statistics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12087",
+        "server": "cnx.org",
+        "style": "microbiology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "e42bd376-624b-4c0f-972f-e0c57998e765",
+            "slug": "microbiology"
+          }
+        ]
+      },
+      {
+        "collection_id": "col29124",
+        "server": "cnx.org",
+        "style": "principles-management",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "2d941ab9-ac5b-4eb8-b21c-965d36a4f296",
+            "slug": "organizational-behavior"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12081",
+        "server": "cnx.org",
+        "style": "hs-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "cce64fde-f448-43b8-ae88-27705cceb0da",
+            "slug": "physics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11756",
+        "server": "cnx.org",
+        "style": "dev-math",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "caa57dab-41c7-455e-bd6f-f443cda5519c",
+            "slug": "prealgebra"
+          }
+        ]
+      },
+      {
+        "collection_id": "col30939",
+        "server": "cnx.org",
+        "style": "dev-math",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "f0fa90be-fca8-43c9-9aad-715c0a2cee2b",
+            "slug": "prealgebra-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11667",
+        "server": "cnx.org",
+        "style": "precalculus",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "fd53eae1-fa23-47c7-bb1b-972349835c3c",
+            "slug": "precalculus"
+          }
+        ]
+      },
+      {
+        "collection_id": "col25448",
+        "server": "cnx.org",
+        "style": "accounting",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "9ab4ba6d-1e48-486d-a2de-38ae1617ca84",
+            "slug": "principles-financial-accounting"
+          }
+        ]
+      },
+      {
+        "collection_id": "col25479",
+        "server": "cnx.org",
+        "style": "accounting",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "920d1c8a-606c-4888-bfd4-d1ee27ce1795",
+            "slug": "principles-managerial-accounting"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11613",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "69619d2b-68f0-44b0-b074-a9b2bf90b2c6",
+            "slug": "principles-economics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12122",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "bc498e1f-efe9-43a0-8dea-d3569ad09a82",
+            "slug": "principles-economics-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11626",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "4061c832-098e-4b3c-a1d9-7eb593a2cb31",
+            "slug": "principles-macroeconomics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12190",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "27f59064-990e-48f1-b604-5188b9086c29",
+            "slug": "principles-macroeconomics-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11864",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "33076054-ec1d-4417-8824-ce354efe42d0",
+            "slug": "principles-macroeconomics-ap-courses"
+          }
+        ]
+      },
+      {
+        "collection_id": "col23729",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "9117cf8c-a8a3-4875-8361-9cb0f1fc9362",
+            "slug": "principles-macroeconomics-ap-courses-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col28330",
+        "server": "cnx.org",
+        "style": "principles-management",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "c3acb2ab-7d5c-45ad-b3cd-e59673fedd4e",
+            "slug": "principles-management"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11627",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "ea2f225e-6063-41ca-bcd8-36482e15ef65",
+            "slug": "principles-microeconomics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12170",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "5c09762c-b540-47d3-9541-dda1f44f16e5",
+            "slug": "principles-microeconomics-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11858",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "ca344e2d-6731-43cd-b851-a7b3aa0b37aa",
+            "slug": "principles-microeconomics-ap-courses"
+          }
+        ]
+      },
+      {
+        "collection_id": "col23750",
+        "server": "cnx.org",
+        "style": "economics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "636cbfd9-4e37-4575-83ab-9dec9029ca4e",
+            "slug": "principles-microeconomics-ap-courses-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11629",
+        "server": "cnx.org",
+        "style": "psychology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "4abf04bf-93a0-45c3-9cbc-2cefd46e68cc",
+            "slug": "psychology"
+          }
+        ]
+      },
+      {
+        "collection_id": "col31502",
+        "server": "cnx.org",
+        "style": "psychology",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "06aba565-9432-40f6-97ee-b8a361f118a8",
+            "slug": "psychology-2e"
+          }
+        ]
+      },
+      {
+        "collection_id": "col30309",
+        "server": "cnx.org",
+        "style": "statistics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "394a1101-fd8f-4875-84fa-55f15b06ba66",
+            "slug": "statistics"
+          }
+        ]
+      },
+      {
+        "collection_id": "col11740",
+        "server": "cnx.org",
+        "style": "history",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "a7ba2fb8-8925-4987-b182-5f4429d48daa",
+            "slug": "us-history"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12031",
+        "server": "cnx.org",
+        "style": "u-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "d50f6e32-0fda-46ef-a362-9bd36ca7c97d",
+            "slug": "university-physics-volume-1"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12074",
+        "server": "cnx.org",
+        "style": "u-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "7a0f9770-1c44-4acd-9920-1cd9a99f2a1e",
+            "slug": "university-physics-volume-2"
+          }
+        ]
+      },
+      {
+        "collection_id": "col12067",
+        "server": "cnx.org",
+        "style": "u-physics",
+        "tutor_only": false,
+        "books": [
+          {
+            "uuid": "af275420-6050-4707-995c-57b9cc13c358",
+            "slug": "university-physics-volume-3"
+          }
+        ]
+      }
+    ],
+    "approved_versions": [
+      {
+        "collection_id": "col12006",
+        "content_version": "1.8.46",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col31596",
+        "content_version": "1.14.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32565",
+        "content_version": "1.1.17",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col23946",
+        "content_version": "1.4.14",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25244",
+        "content_version": "1.5.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25571",
+        "content_version": "1.6.23",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11758",
+        "content_version": "1.33.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11758",
+        "content_version": "1.31.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11995",
+        "content_version": "1.19.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col26739",
+        "content_version": "1.6.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col26739",
+        "content_version": "1.6.5",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11496",
+        "content_version": "1.22.8",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11496",
+        "content_version": "1.22.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11992",
+        "content_version": "1.22.49",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11992",
+        "content_version": "1.22.20",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11448",
+        "content_version": "1.14.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col24361",
+        "content_version": "1.16.179",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col24361",
+        "content_version": "1.16.174",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12078",
+        "content_version": "1.26.26",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12078",
+        "content_version": "1.26.6",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25722",
+        "content_version": "1.5.14",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30149",
+        "content_version": "1.8.9",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30149",
+        "content_version": "1.8.8",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11964",
+        "content_version": "1.22.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11964",
+        "content_version": "1.22.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11965",
+        "content_version": "1.22.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11965",
+        "content_version": "1.15.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11966",
+        "content_version": "1.22.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11966",
+        "content_version": "1.15.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11760",
+        "content_version": "1.13.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col26069",
+        "content_version": "1.18.36",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col26069",
+        "content_version": "1.18.26",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col26488",
+        "content_version": "1.14.36",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col26488",
+        "content_version": "1.14.26",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12012",
+        "content_version": "1.10.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11759",
+        "content_version": "1.32.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11759",
+        "content_version": "1.31.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11759",
+        "content_version": "1.29.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32026",
+        "content_version": "1.10.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32026",
+        "content_version": "1.9.12",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11406",
+        "content_version": "1.23.18",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11406",
+        "content_version": "1.23.16",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11844",
+        "content_version": "1.35.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11844",
+        "content_version": "1.34.4",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30990",
+        "content_version": "1.10.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30990",
+        "content_version": "1.10.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11487",
+        "content_version": "1.17.23",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11487",
+        "content_version": "1.17.18",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12116",
+        "content_version": "1.9.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12116",
+        "content_version": "1.9.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col31130",
+        "content_version": "1.9.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col29104",
+        "content_version": "1.12.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col29104",
+        "content_version": "1.11.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12119",
+        "content_version": "1.14.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col31234",
+        "content_version": "1.7.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col31234",
+        "content_version": "1.6.5",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25734",
+        "content_version": "1.9.8",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25734",
+        "content_version": "1.9.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32642",
+        "content_version": "1.6.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32642",
+        "content_version": "1.6.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32642",
+        "content_version": "1.6.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32642",
+        "content_version": "1.6.21",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11407",
+        "content_version": "1.18.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11762",
+        "content_version": "1.15.10",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11762",
+        "content_version": "1.14.5",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11762",
+        "content_version": "1.14.4",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11762",
+        "content_version": "1.15.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32649",
+        "content_version": "1.3.19",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32649",
+        "content_version": "1.3.17",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32649",
+        "content_version": "1.3.10",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32649",
+        "content_version": "1.3.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col32649",
+        "content_version": "1.1.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11776",
+        "content_version": "1.38.24",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11776",
+        "content_version": "1.38.22",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11562",
+        "content_version": "1.25.23",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11562",
+        "content_version": "1.25.18",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11562",
+        "content_version": "1.25.17",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11562",
+        "content_version": "1.25.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12087",
+        "content_version": "1.9.13",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12087",
+        "content_version": "1.9.12",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col29124",
+        "content_version": "1.9.8",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col29124",
+        "content_version": "1.9.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12081",
+        "content_version": "1.14.21",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12081",
+        "content_version": "1.14.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11756",
+        "content_version": "1.21.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30939",
+        "content_version": "1.11.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30939",
+        "content_version": "1.10.5",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11667",
+        "content_version": "1.36.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25448",
+        "content_version": "1.7.8",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25448",
+        "content_version": "1.7.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25479",
+        "content_version": "1.18.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col25479",
+        "content_version": "1.17.5",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11613",
+        "content_version": "1.12.4",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12122",
+        "content_version": "1.12.4",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12122",
+        "content_version": "1.10.7",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11626",
+        "content_version": "1.13.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12190",
+        "content_version": "1.16.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12190",
+        "content_version": "1.15.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11864",
+        "content_version": "1.4.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col23729",
+        "content_version": "1.15.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col23729",
+        "content_version": "1.14.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col28330",
+        "content_version": "1.12.8",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col28330",
+        "content_version": "1.12.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11627",
+        "content_version": "1.13.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12170",
+        "content_version": "1.19.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12170",
+        "content_version": "1.18.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11858",
+        "content_version": "1.7.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col23750",
+        "content_version": "1.15.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col23750",
+        "content_version": "1.14.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11629",
+        "content_version": "1.13.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col31502",
+        "content_version": "1.4.18",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col31502",
+        "content_version": "1.4.15",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30309",
+        "content_version": "1.8.19",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col30309",
+        "content_version": "1.8.13",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11740",
+        "content_version": "1.10.21",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col11740",
+        "content_version": "1.10.18",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12031",
+        "content_version": "1.22.3",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12031",
+        "content_version": "1.21.4",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12074",
+        "content_version": "1.27.1",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12074",
+        "content_version": "1.24.2",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12067",
+        "content_version": "1.22.5",
+        "min_code_version": "20210224.204120"
+      },
+      {
+        "collection_id": "col12067",
+        "content_version": "1.20.1",
+        "min_code_version": "20210224.204120"
+      }
+    ]
+  }
+  
