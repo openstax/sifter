@@ -61,7 +61,7 @@ window.addEventListener('load', () => {
                 return fetchText(url)
             }
         } catch (err) {
-            console.log(err.message)
+            console.error(err)
             bookLogEl.textContent = `Bad url ${url}`
         }
     }
