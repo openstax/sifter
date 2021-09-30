@@ -54,10 +54,15 @@ window.addEventListener('load', () => {
             }
             await sleep(300)
         }
-        if (useJson) {
-            return fetchJson(url)
-        } else {
-            return fetchText(url)
+        try {
+            if (useJson) {
+                return fetchJson(url)
+            } else {
+                return fetchText(url)
+            }
+        } catch (err) {
+            console.log(err.message)
+            bookLogEl.textContent = `Bad url ${url}`
         }
     }
     const fetchJson = async (url) => (await fetch(url)).json() 
