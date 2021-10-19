@@ -62,7 +62,7 @@ window.addEventListener('load', () => {
             }
         } catch (err) {
             console.error(err)
-            bookLogEl.textContent = `Bad url ${url}`
+            console.log(`Bad url ${url}`)
         }
     }
     const fetchJson = async (url) => (await fetch(url)).json() 
