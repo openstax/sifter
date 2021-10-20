@@ -213,7 +213,12 @@ window.addEventListener('load', () => {
     
                     const li = document.createElement('li')
                     const moduleInfo = pageJson.legacy_id ? `<a target="_blank" href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : ''
-                    li.innerHTML = `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${nodeValue}</a>`
+                    try {
+                        li.innerHTML = `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${nodeValue}</a>`
+                    } catch (e) {
+                        console.error(e)
+                        console.log('invalid XML')
+                    }
                     bookResultsEl.append(li)
                 }
 
