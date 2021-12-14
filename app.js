@@ -1,4 +1,5 @@
 window.addEventListener('load', () => {
+    const TESTED_ABL_VERSION = 2
     const ablUrl = '/content-manager-approved-books/approved-book-list.json'
     const serverRootUrl = 'https://archive-staging.cnx.org/contents'
     const legacyRoot = 'https://legacy.cnx.org/content'
@@ -282,11 +283,22 @@ window.addEventListener('load', () => {
     fetch(ablUrl).then(async res => {
         const approvedBookList = await res.json()
         console.log('Here is the approved book list:', approvedBookList)
-        const bookIdAndSlugs = []
+        if (approvedBookList.api_version !== TESTED_ABL_VERSION) {
+            alert(`Sifter is tested to work with ABL version ${TESTED_ABL_VERSION} but the current api_version is '${approvedBookList.api_version}'. Stuff may not work`)
+        }
+        const bookIdAndSlugs = [] // {uuid, slug, collection_id}
 
         // collect all the books & remember if they are archive/git
         approvedBookList.approved_books.forEach(bookContainer => {
-            bookContainer.books.forEach(book => bookIdAndSlugs.push({...bookContainer, ...book}))
+            if (bookContainer.repository_name) {
+                bookContainer.versions.forEach(v => {
+                    v.commit_metadata.books.forEach(book => bookIdAndSlugs.push({...bookContainer, ...book}))
+                })
+            } else if (bookContainer.collection_id) {
+                bookContainer.books.forEach(book => bookIdAndSlugs.push({...bookContainer, ...book}))
+            } else {
+                console.error("Unsupported approved_book format")
+            }
         })
         // sort by Book slug
         bookIdAndSlugs.sort((a, b) => {
@@ -296,7 +308,7 @@ window.addEventListener('load', () => {
                 return 1
             return 0
         })
-        bookIdAndSlugs.forEach(({uuid, slug, collection_id, server}) => {
+        bookIdAndSlugs.forEach(({uuid, slug, collection_id}) => {
             const o = document.createElement('option')
             o.setAttribute('value', uuid)
             // Git books are not supported yet
