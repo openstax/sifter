@@ -55,5 +55,5 @@ It runs in your browser and pulls content from archive-staging.
 ## ToDone
 
 - [x] Search CNXML
-- [ ] Select subset of books to search
+- [x] Select subset of books to search
 - [ ] Change which server to get content from (currently archive-staging)

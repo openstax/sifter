@@ -45,8 +45,7 @@ window.addEventListener('load', () => {
      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
      
      function* times(x) {
-          for (var i = 0; i < x; i++)
-               yield i;
+          for (var i = 0; i < x; i++) yield i;
      }
      
      async function fetchWithBackoff(url, useJson) {
@@ -160,6 +159,12 @@ window.addEventListener('load', () => {
           
           // these are done in parallel
           for (const bookUuid of bookUuids) {
+               //Retrieve the book object from local storage
+               const book = JSON.parse(window.localStorage.getItem(bookUuid))
+               //Find the book type
+               const bookType = book.repository_name ? 'github' : (book.collection_id ? 'legacy' : null)
+               if (!bookType) continue
+               const legacyBook = bookType === 'legacy'
                let totalMatches = 0
                isSkipping = false
                
@@ -178,221 +183,164 @@ window.addEventListener('load', () => {
                detailsEl.append(bookResultsEl)
                resultsEl.prepend(t1)
                
-               const book = JSON.parse(window.localStorage.getItem(bookUuid))
-               if (book.repository_name) {
+               let bookUrl = legacyBook ? `${legacyServerRootUrl}/${book.books[0].uuid}` : null
+               let bookJson = null
+               let collectionXMLLinks
+               if (!legacyBook) {
+                    //Download the book.xml from Github
                     bookXML = await fetchWithBackoff(`${githubServerURL}/${book.repository_name}/META-INF/books.xml`, false)
                     sandboxEl.innerHTML = bookXML.replace(/ src=/g, ' data-src=')
-                    let collectionXMLLinks = Array.from(sandboxEl.querySelectorAll("book[href]"), e => e.attributes.getNamedItem('href').value)
+                    //List of collection.xml files
+                    collectionXMLLinks = Array.from(sandboxEl.querySelectorAll("book[href]"), e => e.attributes.getNamedItem('href').value)
                     const pipelines = JSON.parse(window.localStorage.getItem('pipelines'))
                     const commit_shas = []
                     book.versions.forEach(v => commit_shas.push(v.commit_sha.substring(0, 7)))
-                    let bookJson = null
-                    let bookURL = null
                     for (let pipeline of pipelines) {
                          for (let commitSha of commit_shas) {
-                              bookURL = `${s3RootUrl}/${pipeline}/contents/${bookUuid}@${commitSha}.json`
-                              try{
-                                   bookJson = await fetchWithBackoff(bookURL, true)
+                              bookUrl = `${s3RootUrl}/${pipeline}/contents/${bookUuid}@${commitSha}.json`
+                              try {
+                                   //Find the right book.json file and exit the loop
+                                   bookJson = await fetchWithBackoff(bookUrl, true)
                                    if (bookJson && bookJson.title) break
-                              }catch (error){
+                              } catch (error) {
                                    console.error(error)
                                    continue;
                               }
                          }
                          if (bookJson && bookJson.title) break
                     }
-                    analyzeFn('BOOK:START', bookJson, bookUuid)
-     
-                    bookTitleEl.textContent = bookJson.title
-                    bookURL = bookURL.replace('.json','')
-     
-                    if (sourceFormat.value === 'cnxml') {
-                         for (let link of collectionXMLLinks) {
-                              link = link.replace("../", "")
-                              let collectionXML = await fetchWithBackoff(`${githubServerURL}/${book.repository_name}/${link}`, false)
-                              sandboxEl.innerHTML = collectionXML.replace(/ src=/g, 'data-src')
-                              let modules = Array.from(sandboxEl.querySelectorAll("module[document]"), e => e.attributes.getNamedItem('document').value)
-                              for (let module of modules) {
-                                   const i = modules.indexOf(module)
-                                   let indexCNXMLLink = `${githubServerURL}/${book.repository_name}/modules/${module}/index.cnxml`
-                                   let indexCNXML = await fetchWithBackoff(indexCNXMLLink, false)
-                                   sandboxEl.innerHTML = indexCNXML.replace(/ src=/g, 'data-src')
-                                   let pageTitle = sandboxEl.querySelector("title").innerHTML
-                                   const matches = findMatches(selector, indexCNXML)
-                                   totalMatches += matches.length
-                                   bookLogEl.textContent = `(${i + 1}/${modules.length}. Found ${totalMatches})`
-                                   // Add a list of links to the matched elements
-                                   for (const match of matches) {
-                                        detailsEl.classList.add('found-matches')
-          
-                                        const nearestId = findNearestId(match)
-                                        const nodeValue = getNodeValue(match)
-          
-                                        const li = document.createElement('li')
-                                        const moduleInfo = `<a target="_blank" href="${indexCNXMLLink}#${nearestId}">${module}</a> `
-                                        try {
-                                             li.innerHTML = `${moduleInfo}${pageTitle} <a target="_blank" href="${bookURL}#${nearestId}">${nodeValue}</a>`
-                                        } catch (e) {
-                                             console.error(e)
-                                             console.log('invalid XML')
-                                        }
-                                        bookResultsEl.append(li)
+               } else bookJson = await fetchWithBackoff(bookUrl, true)
+               
+               
+               analyzeFn('BOOK:START', bookJson, bookUuid)
+               
+               
+               bookTitleEl.textContent = bookJson.title
+               bookUrl = bookUrl.replace('.json', '')
+               //Currently trying to merge the cnxml process for legacy with the one for Github books. Will get back to this later
+               if (!legacyBook && sourceFormat.value === 'cnxml') {
+                    for (let link of collectionXMLLinks) {
+                         link = link.replace("../", "")
+                         let collectionXML = await fetchWithBackoff(`${githubServerURL}/${book.repository_name}/${link}`, false)
+                         sandboxEl.innerHTML = collectionXML.replace(/ src=/g, 'data-src')
+                         let modules = Array.from(sandboxEl.querySelectorAll("module[document]"), e => e.attributes.getNamedItem('document').value)
+                         for (let module of modules) {
+                              const i = modules.indexOf(module)
+                              let indexCNXMLLink = `${githubServerURL}/${book.repository_name}/modules/${module}/index.cnxml`
+                              let indexCNXML = await fetchWithBackoff(indexCNXMLLink, false)
+                              sandboxEl.innerHTML = indexCNXML
+                              let pageTitle = sandboxEl.querySelector("title").innerHTML
+                              const matches = findMatches(selector, indexCNXML)
+                              totalMatches += matches.length
+                              bookLogEl.textContent = `(${i + 1}/${modules.length}. Found ${totalMatches})`
+                              // Add a list of links to the matched elements
+                              for (const match of matches) {
+                                   detailsEl.classList.add('found-matches')
+                                   
+                                   const nearestId = findNearestId(match)
+                                   const nodeValue = getNodeValue(match)
+                                   
+                                   const li = document.createElement('li')
+                                   //Issue With how to rewrite the redirection URL to the right cnxml file attribute
+                                   const moduleInfo = `<a target="_blank" href="${indexCNXMLLink}#${nearestId}">${module}</a> `
+                                   try {
+                                        li.innerHTML = `${moduleInfo}${pageTitle} <a target="_blank" href="${bookUrl}#${nearestId}">${nodeValue}</a>`
+                                   } catch (e) {
+                                        console.error(e)
+                                        console.log('invalid XML')
+                                        continue
                                    }
+                                   bookResultsEl.append(li)
                               }
+                              
                          }
-                    }else{
-                         const pageRefs = []
-                         recLeafPages(pageRefs, bookJson.tree)
-     
-                         for (const pageRef of pageRefs) {
-                              try {
-                                   const i = pageRefs.indexOf(pageRef)
-     
-                                   // Check this in the loop so that users can update the value while this is running
-                                   let stopAfterNPagesCount = Number.parseInt(stopAfterNPages.value)
-                                   if (Number.isNaN(stopAfterNPagesCount)) {
-                                        stopAfterNPagesCount = Number.POSITIVE_INFINITY
-                                   }
-                                   if (i >= stopAfterNPagesCount) {
-                                        break
-                                   }
-                                   pageRef.id = pageRef.id.replace("@", '')
-                                   const pageUrl = `${bookURL}:${pageRef.id}`
-                                   const pageJson = await fetchWithBackoff(`${pageUrl}.json`, true)
-     
-                                   analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
-     
-                                   let sourceCode = pageJson.content
-     
-                                   const matches = findMatches(selector, sourceCode)
-                                   totalMatches += matches.length
-                                   bookLogEl.textContent = `(${i + 1}/${pageRefs.length}. Found ${totalMatches})`
-     
-                                   // Add a list of links to the matched elements
-                                   for (const match of matches) {
-                                        detailsEl.classList.add('found-matches')
-          
-                                        const nearestId = findNearestId(match)
-                                        const nodeValue = getNodeValue(match)
-          
-                                        const li = document.createElement('li')
-                                        try {
-                                             li.innerHTML = `${pageJson.title} <a target="_blank" href="${pageUrl}.xhtml#${nearestId}">${nodeValue}</a>`
-                                        } catch (e) {
-                                             console.error(e)
-                                             console.log('invalid XML')
-                                        }
-                                        bookResultsEl.append(li)
-                                   }
-     
-                                   if (matches.length > 0 && stopAfterOneEl.checked) {
-                                        // go to the next book
-                                        isSkipping = true
-                                   }
-     
-                                   // Break when stop button is pressed
-                                   if (isStopping) {
-                                        selectorEl.disabled = false
-                                        startEl.disabled = false
-                                        booksEl.disabled = false
-                                        stopEl.disabled = true
-                                        skipEl.disabled = true
-                                        return
-                                   }
-                                   if (isSkipping) {
-                                        break
-                                   }
-                              }catch (error){
-                                   console.error(error)
-                                   continue
-                              }
-          
-                         }
-                         analyzeFn('BOOK:END', bookJson, bookUuid)
                     }
-               } else if (book.collection_id) {
+               } else {
                     
-                    const bookUrl = `${legacyServerRootUrl}/${book.books[0].uuid}`
-                    const bookJson = await fetchWithBackoff(bookUrl, true)
-                    
-                    analyzeFn('BOOK:START', bookJson, bookUuid)
-                    
-                    bookTitleEl.textContent = bookJson.title
                     
                     const pageRefs = []
                     recLeafPages(pageRefs, bookJson.tree)
                     
                     for (const pageRef of pageRefs) {
-                         const i = pageRefs.indexOf(pageRef)
-                         
-                         // Check this in the loop so that users can update the value while this is running
-                         let stopAfterNPagesCount = Number.parseInt(stopAfterNPages.value)
-                         if (Number.isNaN(stopAfterNPagesCount)) {
-                              stopAfterNPagesCount = Number.POSITIVE_INFINITY
-                         }
-                         if (i >= stopAfterNPagesCount) {
-                              break
-                         }
-                         
-                         const pageUrl = `${bookUrl}:${pageRef.id}`
-                         const pageJson = await fetchWithBackoff(pageUrl, true)
-                         
-                         analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
-                         
-                         let sourceCode
-                         if (sourceFormat.value === 'cnxml') {
-                              const moduleResource = pageJson.resources.filter(r => r.filename === 'index.cnxml')[0]
-                              if (!moduleResource) {
-                                   continue
-                              }
-                              sourceCode = await fetchWithBackoff(`https://archive-staging.cnx.org/resources/${moduleResource.id}`, false)
-                              sourceCode = sourceCode.replace('<?xml version="1.0"?>', '')
-                         } else {
-                              sourceCode = pageJson.content
-                         }
-                         const matches = findMatches(selector, sourceCode)
-                         totalMatches += matches.length
-                         bookLogEl.textContent = `(${i + 1}/${pageRefs.length}. Found ${totalMatches})`
-                         
-                         // Add a list of links to the matched elements
-                         for (const match of matches) {
-                              detailsEl.classList.add('found-matches')
+                         try {
+                              const i = pageRefs.indexOf(pageRef)
                               
-                              const nearestId = findNearestId(match)
-                              const nodeValue = getNodeValue(match)
-                              
-                              const li = document.createElement('li')
-                              const moduleInfo = pageJson.legacy_id ? `<a target="_blank" href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : ''
-                              try {
-                                   li.innerHTML = `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${nodeValue}</a>`
-                              } catch (e) {
-                                   console.error(e)
-                                   console.log('invalid XML')
+                              // Check this in the loop so that users can update the value while this is running
+                              let stopAfterNPagesCount = Number.parseInt(stopAfterNPages.value)
+                              if (Number.isNaN(stopAfterNPagesCount)) {
+                                   stopAfterNPagesCount = Number.POSITIVE_INFINITY
                               }
-                              bookResultsEl.append(li)
-                         }
-                         
-                         if (matches.length > 0 && stopAfterOneEl.checked) {
-                              // go to the next book
-                              isSkipping = true
-                         }
-                         
-                         // Break when stop button is pressed
-                         if (isStopping) {
-                              selectorEl.disabled = false
-                              startEl.disabled = false
-                              booksEl.disabled = false
-                              stopEl.disabled = true
-                              skipEl.disabled = true
-                              return
-                         }
-                         if (isSkipping) {
-                              break
+                              if (i >= stopAfterNPagesCount) {
+                                   break
+                              }
+                              pageRef.id = !legacyBook ? pageRef.id.replace("@", '') : pageRef.id
+                              const pageUrl = `${bookUrl}:${pageRef.id}` + (!legacyBook ? '.json' : '')
+                              const pageJson = await fetchWithBackoff(`${pageUrl}`, true)
+                              
+                              analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
+                              
+                              let sourceCode
+                              if (legacyBook && sourceFormat.value === 'cnxml') {
+                                   const moduleResource = pageJson.resources.filter(r => r.filename === 'index.cnxml')[0]
+                                   if (!moduleResource) {
+                                        continue
+                                   }
+                                   sourceCode = await fetchWithBackoff(`https://archive-staging.cnx.org/resources/${moduleResource.id}`, false)
+                                   sourceCode = sourceCode.replace('<?xml version="1.0"?>', '')
+                              } else {
+                                   sourceCode = pageJson.content
+                              }
+                              
+                              const matches = findMatches(selector, sourceCode)
+                              totalMatches += matches.length
+                              bookLogEl.textContent = `(${i + 1}/${pageRefs.length}. Found ${totalMatches})`
+                              
+                              // Add a list of links to the matched elements
+                              for (const match of matches) {
+                                   detailsEl.classList.add('found-matches')
+                                   
+                                   const nearestId = findNearestId(match)
+                                   const nodeValue = getNodeValue(match)
+                                   
+                                   const li = document.createElement('li')
+                                   const moduleInfo = legacyBook ? (pageJson.legacy_id ? `<a target="_blank" href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : '') : ''
+                                   
+                                   try {
+                                        li.innerHTML = legacyBook ? `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${nodeValue}</a>` : `${pageJson.title} <a target="_blank" href="${pageUrl}.xhtml#${nearestId}">${nodeValue}</a>`
+                                   } catch (e) {
+                                        console.error(e)
+                                        console.log('invalid XML')
+                                   }
+                                   bookResultsEl.append(li)
+                              }
+                              
+                              
+                              if (matches.length > 0 && stopAfterOneEl.checked) {
+                                   // go to the next book
+                                   isSkipping = true
+                              }
+                              
+                              // Break when stop button is pressed
+                              if (isStopping) {
+                                   selectorEl.disabled = false
+                                   startEl.disabled = false
+                                   booksEl.disabled = false
+                                   stopEl.disabled = true
+                                   skipEl.disabled = true
+                                   return
+                              }
+                              if (isSkipping) {
+                                   break
+                              }
+                         } catch (error) {
+                              console.error(error)
+                              continue
                          }
                          
                     }
-                    analyzeFn('BOOK:END', bookJson, bookUuid)
                }
+               analyzeFn('BOOK:END', bookJson, bookUuid)
+               
                
           }
           
@@ -446,8 +394,7 @@ window.addEventListener('load', () => {
           approvedBookList.approved_books.forEach(bookContainer => {
                if (bookContainer.repository_name) {
                     bookContainer.versions.forEach(v => {
-                         if(pipelines.indexOf(v.min_code_version) === -1)
-                              pipelines.push(v.min_code_version)
+                         if (pipelines.indexOf(v.min_code_version) === -1) pipelines.push(v.min_code_version)
                          v.commit_metadata.books.forEach(book => {
                               bookIdAndSlugs.push({...bookContainer, ...book})
                               window.localStorage.setItem(book.uuid, JSON.stringify(bookContainer))
@@ -464,10 +411,8 @@ window.addEventListener('load', () => {
           })
           // sort by Book slug
           bookIdAndSlugs.sort((a, b) => {
-               if (a.slug.toLowerCase() < b.slug.toLowerCase())
-                    return -1
-               if (a.slug.toLowerCase() > b.slug.toLowerCase())
-                    return 1
+               if (a.slug.toLowerCase() < b.slug.toLowerCase()) return -1
+               if (a.slug.toLowerCase() > b.slug.toLowerCase()) return 1
                return 0
           })
           pipelines.sort((a, b) => {
@@ -477,7 +422,7 @@ window.addEventListener('load', () => {
           bookIdAndSlugs.forEach(({uuid, slug, collection_id}) => {
                const o = document.createElement('option')
                o.setAttribute('value', uuid)
-               // Git books are not supported yet
+               o.setAttribute('selected', 'selected')
                o.append(slug)
                booksEl.append(o)
           })
@@ -600,9 +545,7 @@ window.addEventListener('load', () => {
           }
           
           for (var i = 0; i < len; ++i) {
-               var x = qs[i].replace(regexp, '%20'),
-                   idx = x.indexOf(eq),
-                   kstr, vstr, k, v;
+               var x = qs[i].replace(regexp, '%20'), idx = x.indexOf(eq), kstr, vstr, k, v;
                
                if (idx >= 0) {
                     kstr = x.substr(0, idx);
