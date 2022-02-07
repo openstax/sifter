@@ -3,7 +3,8 @@ window.addEventListener('load', () => {
      const ablUrl = '/content-manager-approved-books/approved-book-list.json'
      const legacyServerRootUrl = 'https://archive-staging.cnx.org/contents'
      const legacyRoot = 'https://legacy.cnx.org/content'
-     const githubServerURL = 'https://openstax.github.io'
+     const openstaxGithubURL = 'https://openstax.github.io'
+     const githubServerURL = 'https://github.com/openstax/'
      const s3RootUrl = 'https://openstax.org/apps/archive'
      const namespacePrefixes = {
           'c' : 'http://cnx.rice.edu/cnxml',
@@ -188,7 +189,7 @@ window.addEventListener('load', () => {
                let collectionXMLLinks
                if (!legacyBook) {
                     //Download the book.xml from Github
-                    bookXML = await fetchWithBackoff(`${githubServerURL}/${book.repository_name}/META-INF/books.xml`, false)
+                    bookXML = await fetchWithBackoff(`${openstaxGithubURL}/${book.repository_name}/META-INF/books.xml`, false)
                     sandboxEl.innerHTML = bookXML.replace(/ src=/g, ' data-src=')
                     //List of collection.xml files
                     collectionXMLLinks = Array.from(sandboxEl.querySelectorAll("book[href]"), e => e.attributes.getNamedItem('href').value)
@@ -221,12 +222,12 @@ window.addEventListener('load', () => {
                if (!legacyBook && sourceFormat.value === 'cnxml') {
                     for (let link of collectionXMLLinks) {
                          link = link.replace("../", "")
-                         let collectionXML = await fetchWithBackoff(`${githubServerURL}/${book.repository_name}/${link}`, false)
+                         let collectionXML = await fetchWithBackoff(`${openstaxGithubURL}/${book.repository_name}/${link}`, false)
                          sandboxEl.innerHTML = collectionXML.replace(/ src=/g, 'data-src')
                          let modules = Array.from(sandboxEl.querySelectorAll("module[document]"), e => e.attributes.getNamedItem('document').value)
                          for (let module of modules) {
                               const i = modules.indexOf(module)
-                              let indexCNXMLLink = `${githubServerURL}/${book.repository_name}/modules/${module}/index.cnxml`
+                              let indexCNXMLLink = `${openstaxGithubURL}/${book.repository_name}/modules/${module}/index.cnxml`
                               let indexCNXML = await fetchWithBackoff(indexCNXMLLink, false)
                               sandboxEl.innerHTML = indexCNXML
                               let pageTitle = sandboxEl.querySelector("title").innerHTML
@@ -242,9 +243,9 @@ window.addEventListener('load', () => {
                                    
                                    const li = document.createElement('li')
                                    //Issue With how to rewrite the redirection URL to the right cnxml file attribute
-                                   const moduleInfo = `<a target="_blank" href="${indexCNXMLLink}#${nearestId}">${module}</a> `
+                                   const moduleInfo = `<a target="_blank" href="${githubServerURL}/${book.repository_name}/blob/main/modules/${module}/index.cnxml#${nearestId}">${module}</a> `
                                    try {
-                                        li.innerHTML = `${moduleInfo}${pageTitle} <a target="_blank" href="${bookUrl}#${nearestId}">${nodeValue}</a>`
+                                        li.innerHTML = `${moduleInfo}${pageTitle} <a target="_blank" href="${githubServerURL}/${book.repository_name}/blob/main/modules/${module}/index.cnxml#${nearestId}">${nodeValue}</a>`
                                    } catch (e) {
                                         console.error(e)
                                         console.log('invalid XML')

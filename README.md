@@ -1,4 +1,4 @@
-# [Structered Content Sifter](https://openstax.github.io/sifter/)
+# [Structured Content Sifter](https://openstax.github.io/sifter/)
 
 This searches our books using any CSS selector! You can share the link with others so they can see the results too.
 
