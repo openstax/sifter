@@ -216,6 +216,10 @@ window.addEventListener('load', () => {
                analyzeFn('BOOK:START', bookJson, bookUuid)
                
                
+               if (bookJson === null) {
+                   alert(`Could not find a baked version of ${bookUuid}@${commitSha}. Tried using these codeversions: ${JSON.stringify(pipelines)}`)
+                   return
+               }
                bookTitleEl.textContent = bookJson.title
                bookUrl = bookUrl.replace('.json', '')
                //Currently trying to merge the cnxml process for legacy with the one for Github books. Will get back to this later
