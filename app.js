@@ -39,6 +39,10 @@ window.addEventListener('load', () => {
      const form = qs('form')
      const sourceFormat = form.elements['sourceFormat']
      
+     const errors = qs('#errors')
+     const errorLogLabel = qs('#errorLogLabel')
+     const resultsLabel = qs('#resultsLabel')
+     
      let isStopping = false
      let isSkipping = false
      bookCountEl.setAttribute('href', ablUrl)
@@ -50,31 +54,51 @@ window.addEventListener('load', () => {
      }
      
      async function fetchWithBackoff(url, useJson) {
+     
           for (var _ of times(3)) {
                try {
-                    if (useJson) {
-                         return fetchJson(url)
-                    } else {
-                         return fetchText(url)
-                    }
+                    return await fetchWithError(url, useJson)
                } catch (err) {
+                    printErrorToUser(err, url)
+                    console.error(`${err}: ${url}`)
                }
                await sleep(300)
           }
           try {
-               if (useJson) {
-                    return fetchJson(url)
-               } else {
-                    return fetchText(url)
-               }
+               return await fetchWithError(url, useJson)
           } catch (err) {
                console.error(err)
                console.log(`Bad url ${url}`)
+               printErrorToUser(err, url)
           }
      }
      
-     const fetchJson = async (url) => (await fetch(url)).json()
-     const fetchText = async (url) => (await fetch(url)).text()
+     function printErrorToUser(err,url){
+          let li = document.createElement('li')
+          
+          
+          let time = new Date().toLocaleTimeString()
+          if(url)
+               li.innerHTML = `${time} ::: ${err}: <a href="${url}">${url}</a>`
+          else
+               li.innerHTML = `${time} ::: ${err}`
+          errors.append(li)
+     }
+     async function fetchWithError(url, useJSON) {
+          try {
+               let response = await fetch(url)
+               if (!response.ok) // or check for response.status
+                    throw new Error(response.statusText);
+               if(useJSON)
+                    return await response.json();
+               else
+                    return await response.text();
+               // process body
+          } catch (err) {
+               console.log(err)
+               throw new Error(err)
+          }
+     };
      
      let isValid = false
      
@@ -148,9 +172,13 @@ window.addEventListener('load', () => {
           
           const bookUuids = getSelectedBookUUIDs()
           
+          resultsLabel.classList = ''
+          errorLogLabel.classList = ''
+          
           // clear
           isStopping = false
           resultsEl.innerHTML = ''
+          errors.innerHTML = ''
           
           selectorEl.disabled = true
           startEl.disabled = true
@@ -202,13 +230,13 @@ window.addEventListener('load', () => {
                               try {
                                    //Find the right book.json file and exit the loop
                                    bookJson = await fetchWithBackoff(bookUrl, true)
-                                   if (bookJson && bookJson.title) break
+                                   if (bookJson!=null && bookJson.title!=null) break
                               } catch (error) {
                                    console.error(error)
                                    continue;
                               }
                          }
-                         if (bookJson && bookJson.title) break
+                         if (bookJson!=null && bookJson.title!=null) break
                     }
                } else bookJson = await fetchWithBackoff(bookUrl, true)
                
@@ -216,9 +244,9 @@ window.addEventListener('load', () => {
                analyzeFn('BOOK:START', bookJson, bookUuid)
                
                
-               if (bookJson === null) {
-                   alert(`Could not find a baked version of ${bookUuid}@${commitSha}. Tried using these codeversions: ${JSON.stringify(pipelines)}`)
-                   return
+               if (bookJson == null) {
+                    printErrorToUser(`Could not find a baked version of ${bookUuid}. Book details: ${JSON.stringify(book)}`,null)
+                    continue
                }
                bookTitleEl.textContent = bookJson.title
                bookUrl = bookUrl.replace('.json', '')
@@ -261,7 +289,6 @@ window.addEventListener('load', () => {
                          }
                     }
                } else {
-                    
                     
                     const pageRefs = []
                     recLeafPages(pageRefs, bookJson.tree)

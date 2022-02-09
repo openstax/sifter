@@ -41,6 +41,9 @@
             font-weight: bold;
             color: red;
         }
+        .search-not-started{
+            display:none
+        }
     </style>
 </head>
 <body>
@@ -94,7 +97,11 @@
         <br/>
         <select id="books" name="books" multiple="multiple" class="col-sm-8" size="15"></select>
     </form>
+    <h4 class="search-not-started" id="resultsLabel">Results</h4>
     <ul id="results"></ul>
+    <h4 class="search-not-started" id="errorLogLabel">Error Log</h4>
+    <ul id="errors" style="font-size: x-small">
+    </ul>
 </div>
 <div id="sandbox"></div>
 
