@@ -2,8 +2,218 @@
   "api_version": 2,
   "approved_books": [
     {
+      "repository_name": "osbooks-principles-economics-bundle",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 1,
+          "commit_sha": "314942b33c516c70160134c98eb53055a14f3943",
+          "commit_metadata": {
+            "committed_at": "2022-01-12T17:32:00+00:00",
+            "books": [
+              {
+                "style": "economics",
+                "uuid": "69619d2b-68f0-44b0-b074-a9b2bf90b2c6",
+                "slug": "principles-economics"
+              },
+              {
+                "style": "economics",
+                "uuid": "4061c832-098e-4b3c-a1d9-7eb593a2cb31",
+                "slug": "principles-macroeconomics"
+              },
+              {
+                "style": "economics",
+                "uuid": "ea2f225e-6063-41ca-bcd8-36482e15ef65",
+                "slug": "principles-microeconomics"
+              },
+              {
+                "style": "economics",
+                "uuid": "33076054-ec1d-4417-8824-ce354efe42d0",
+                "slug": "principles-macroeconomics-ap-courses"
+              },
+              {
+                "style": "economics",
+                "uuid": "ca344e2d-6731-43cd-b851-a7b3aa0b37aa",
+                "slug": "principles-microeconomics-ap-courses"
+              }
+            ]
+          }
+        },
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 2,
+          "commit_sha": "122f50b60089b57a7d1ad812cbe8de519678b4b3",
+          "commit_metadata": {
+            "committed_at": "2022-01-27T17:32:00+00:00",
+            "books": [
+              {
+                "style": "economics",
+                "uuid": "bc498e1f-efe9-43a0-8dea-d3569ad09a82",
+                "slug": "principles-economics-2e"
+              },
+              {
+                "style": "economics",
+                "uuid": "27f59064-990e-48f1-b604-5188b9086c29",
+                "slug": "principles-macroeconomics-2e"
+              },
+              {
+                "style": "economics",
+                "uuid": "5c09762c-b540-47d3-9541-dda1f44f16e5",
+                "slug": "principles-microeconomics-2e"
+              },
+              {
+                "style": "economics",
+                "uuid": "9117cf8c-a8a3-4875-8361-9cb0f1fc9362",
+                "slug": "principles-macroeconomics-ap-courses-2e"
+              },
+              {
+                "style": "economics",
+                "uuid": "9117cf8c-a8a3-4875-8361-9cb0f1fc9362",
+                "slug": "principles-microeconomics-ap-courses-2e"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository_name": "osbooks-statistics",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 1,
+          "commit_sha": "79fff4b86726b716d67ef5a5f8247db25b3567ef",
+          "commit_metadata": {
+            "committed_at": "2022-01-28T17:32:00+00:00",
+            "books": [
+              {
+                "style": "statistics",
+                "uuid": "394a1101-fd8f-4875-84fa-55f15b06ba66",
+                "slug": "statistics"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository_name": "osbooks-introductory-statistics-bundle",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 1,
+          "commit_sha": "b2d6c72e96a6d78d713935e8876ed2015782f202",
+          "commit_metadata": {
+            "committed_at": "2022-01-27T17:32:00+00:00",
+            "books": [
+              {
+                "style": "statistics",
+                "uuid": "30189442-6998-4686-ac05-ed152b91b9de",
+                "slug": "introductory-statistics"
+              },
+              {
+                "style": "statistics",
+                "uuid": "b56bb9e9-5eb8-48ef-9939-88b1b12ce22f",
+                "slug": "introductory-business-statistics"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository_name": "osbooks-principles-accounting-bundle",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 1,
+          "commit_sha": "b9d51183f034108cec6dc5f613e64bdcf2563328",
+          "commit_metadata": {
+            "committed_at": "2022-01-27T17:32:00+00:00",
+            "books": [
+              {
+                "style": "accounting",
+                "uuid": "9ab4ba6d-1e48-486d-a2de-38ae1617ca84",
+                "slug": "principles-financial-accounting"
+              },
+              {
+                "style": "accounting",
+                "uuid": "920d1c8a-606c-4888-bfd4-d1ee27ce1795",
+                "slug": "principles-managerial-accounting"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository_name": "osbooks-introduction-business",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 1,
+          "commit_sha": "5876a1f64f7090fafb6f6db01ccf5e589de2df73",
+          "commit_metadata": {
+            "committed_at": "2022-01-27T17:32:00+00:00",
+            "books": [
+              {
+                "style": "intro-business",
+                "uuid": "4e09771f-a8aa-40ce-9063-aa58cc24e77f",
+                "slug": "introduction-business"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository_name": "osbooks-introduccion-estadistica-bundle",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20220118.185250",
+          "edition": 1,
+          "commit_sha": "dc4550bfda2a5ab6d108424c7d9e4196db100fc6",
+          "commit_metadata": {
+            "committed_at": "2022-01-28T17:32:00+00:00",
+            "books": [
+              {
+                "style": "statistics",
+                "uuid": "e53d6c8b-fd9e-4a28-8930-c564ca6fd77d",
+                "slug": "introducción-estadística"
+              },
+              {
+                "style": "statistics",
+                "uuid": "f346fe75-ae39-4d11-ad32-d80c03df58cb",
+                "slug": "introducción-estadística-empresarial"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
       "repository_name": "osbooks-writing-guide",
-      "platforms": ["REX"],
+      "platforms": [
+        "REX"
+      ],
       "versions": [
         {
           "min_code_version": "20211111.153520",
@@ -24,7 +234,9 @@
     },
     {
       "repository_name": "osbooks-college-algebra-bundle",
-      "platforms": ["REX"],
+      "platforms": [
+        "REX"
+      ],
       "versions": [
         {
           "min_code_version": "20210224.204120",
@@ -75,12 +287,12 @@
               },
               {
                 "style": "precalculus",
-                "uuid": "59024a63-2b1a-4631-94c5-ae275a77b587",
+                "uuid": "f021395f-fd63-46cd-ab95-037c6f051730",
                 "slug": "precalculus-2e"
               },
               {
                 "style": "precalculus-coreq",
-                "uuid": "f021395f-fd63-46cd-ab95-037c6f051730",
+                "uuid": "59024a63-2b1a-4631-94c5-ae275a77b587",
                 "slug": "college-algebra-corequisite-support-2e"
               }
             ]
@@ -545,18 +757,6 @@
       ]
     },
     {
-      "collection_id": "col25734",
-      "server": "cnx.org",
-      "style": "intro-business",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "4e09771f-a8aa-40ce-9063-aa58cc24e77f",
-          "slug": "introduction-business"
-        }
-      ]
-    },
-    {
       "collection_id": "col32642",
       "server": "cnx.org",
       "style": "business-ethics",
@@ -601,30 +801,6 @@
         {
           "uuid": "746f171e-0d6a-4ef2-b69d-367880872f4a",
           "slug": "introduction-sociology-3e"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11776",
-      "server": "cnx.org",
-      "style": "statistics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "b56bb9e9-5eb8-48ef-9939-88b1b12ce22f",
-          "slug": "introductory-business-statistics"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11562",
-      "server": "cnx.org",
-      "style": "statistics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "30189442-6998-4686-ac05-ed152b91b9de",
-          "slug": "introductory-statistics"
         }
       ]
     },
@@ -701,102 +877,6 @@
       ]
     },
     {
-      "collection_id": "col25448",
-      "server": "cnx.org",
-      "style": "accounting",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "9ab4ba6d-1e48-486d-a2de-38ae1617ca84",
-          "slug": "principles-financial-accounting"
-        }
-      ]
-    },
-    {
-      "collection_id": "col25479",
-      "server": "cnx.org",
-      "style": "accounting",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "920d1c8a-606c-4888-bfd4-d1ee27ce1795",
-          "slug": "principles-managerial-accounting"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11613",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "69619d2b-68f0-44b0-b074-a9b2bf90b2c6",
-          "slug": "principles-economics"
-        }
-      ]
-    },
-    {
-      "collection_id": "col12122",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "bc498e1f-efe9-43a0-8dea-d3569ad09a82",
-          "slug": "principles-economics-2e"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11626",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "4061c832-098e-4b3c-a1d9-7eb593a2cb31",
-          "slug": "principles-macroeconomics"
-        }
-      ]
-    },
-    {
-      "collection_id": "col12190",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "27f59064-990e-48f1-b604-5188b9086c29",
-          "slug": "principles-macroeconomics-2e"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11864",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "33076054-ec1d-4417-8824-ce354efe42d0",
-          "slug": "principles-macroeconomics-ap-courses"
-        }
-      ]
-    },
-    {
-      "collection_id": "col23729",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "9117cf8c-a8a3-4875-8361-9cb0f1fc9362",
-          "slug": "principles-macroeconomics-ap-courses-2e"
-        }
-      ]
-    },
-    {
       "collection_id": "col28330",
       "server": "cnx.org",
       "style": "principles-management",
@@ -805,54 +885,6 @@
         {
           "uuid": "c3acb2ab-7d5c-45ad-b3cd-e59673fedd4e",
           "slug": "principles-management"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11627",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "ea2f225e-6063-41ca-bcd8-36482e15ef65",
-          "slug": "principles-microeconomics"
-        }
-      ]
-    },
-    {
-      "collection_id": "col12170",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "5c09762c-b540-47d3-9541-dda1f44f16e5",
-          "slug": "principles-microeconomics-2e"
-        }
-      ]
-    },
-    {
-      "collection_id": "col11858",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "ca344e2d-6731-43cd-b851-a7b3aa0b37aa",
-          "slug": "principles-microeconomics-ap-courses"
-        }
-      ]
-    },
-    {
-      "collection_id": "col23750",
-      "server": "cnx.org",
-      "style": "economics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "636cbfd9-4e37-4575-83ab-9dec9029ca4e",
-          "slug": "principles-microeconomics-ap-courses-2e"
         }
       ]
     },
@@ -877,18 +909,6 @@
         {
           "uuid": "06aba565-9432-40f6-97ee-b8a361f118a8",
           "slug": "psychology-2e"
-        }
-      ]
-    },
-    {
-      "collection_id": "col30309",
-      "server": "cnx.org",
-      "style": "statistics",
-      "tutor_only": false,
-      "books": [
-        {
-          "uuid": "394a1101-fd8f-4875-84fa-55f15b06ba66",
-          "slug": "statistics"
         }
       ]
     },
@@ -962,7 +982,7 @@
       "content_version": "1.12.2",
       "min_code_version": "20210823.155019"
     },
-{
+    {
       "collection_id": "col12006",
       "content_version": "1.8.46",
       "min_code_version": "20210224.204120"
@@ -982,7 +1002,7 @@
       "content_version": "1.3.1",
       "min_code_version": "20210224.204120"
     },
-        {
+    {
       "collection_id": "col33102",
       "content_version": "1.3.3",
       "min_code_version": "20210224.204120"
@@ -997,7 +1017,7 @@
       "content_version": "1.1.125",
       "min_code_version": "20210224.204120"
     },
-     {
+    {
       "collection_id": "col32565",
       "content_version": "1.1.122",
       "min_code_version": "20210224.204120"
@@ -1017,7 +1037,7 @@
       "content_version": "1.4.14",
       "min_code_version": "20210224.204120"
     },
-     {
+    {
       "collection_id": "col25244",
       "content_version": "1.7.39",
       "min_code_version": "20210224.204120"
@@ -1288,16 +1308,6 @@
       "min_code_version": "20210224.204120"
     },
     {
-      "collection_id": "col25734",
-      "content_version": "1.11.6",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col25734",
-      "content_version": "1.9.8",
-      "min_code_version": "20210224.204120"
-    },
-    {
       "collection_id": "col32642",
       "content_version": "1.6.3",
       "min_code_version": "20210224.204120"
@@ -1330,26 +1340,6 @@
     {
       "collection_id": "col32649",
       "content_version": "1.3.19",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11776",
-      "content_version": "1.38.28",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11776",
-      "content_version": "1.38.24",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11562",
-      "content_version": "1.25.24",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11562",
-      "content_version": "1.25.23",
       "min_code_version": "20210224.204120"
     },
     {
@@ -1403,71 +1393,6 @@
       "min_code_version": "20210224.204120"
     },
     {
-      "collection_id": "col25448",
-      "content_version": "1.7.16",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col25448",
-      "content_version": "1.7.8",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col25479",
-      "content_version": "1.18.15",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col25479",
-      "content_version": "1.18.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11613",
-      "content_version": "1.12.4",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col12122",
-      "content_version": "1.14.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col12122",
-      "content_version": "1.12.4",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11626",
-      "content_version": "1.13.2",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col12190",
-      "content_version": "1.19.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col12190",
-      "content_version": "1.16.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11864",
-      "content_version": "1.4.2",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col23729",
-      "content_version": "1.17.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col23729",
-      "content_version": "1.15.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
       "collection_id": "col28330",
       "content_version": "1.14.4",
       "min_code_version": "20210224.204120"
@@ -1475,36 +1400,6 @@
     {
       "collection_id": "col28330",
       "content_version": "1.12.8",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11627",
-      "content_version": "1.13.3",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col12170",
-      "content_version": "1.21.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col12170",
-      "content_version": "1.19.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11858",
-      "content_version": "1.7.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col23750",
-      "content_version": "1.17.1",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col23750",
-      "content_version": "1.15.1",
       "min_code_version": "20210224.204120"
     },
     {
@@ -1520,16 +1415,6 @@
     {
       "collection_id": "col31502",
       "content_version": "1.4.18",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col30309",
-      "content_version": "1.8.22",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col30309",
-      "content_version": "1.8.19",
       "min_code_version": "20210224.204120"
     },
     {
