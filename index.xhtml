@@ -41,17 +41,16 @@
             font-weight: bold;
             color: red;
         }
-        .search-not-started {
-            display: none
+        .search-not-started{
+            display:none
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="text-center">
-        <h1>Bulk Content Search</h1>
-        <p>This searches most of our books (<a id="book-count">???</a>) for content by loading the books in your
-            browser.
+        <h1 >Bulk Content Search</h1>
+        <p>This searches most of our books (<a id="book-count">???</a>) for content by loading the books in your browser.
             The
             first time is slow but once the books are loaded searches are really fast.</p>
         <p><a target="_blank" href="https://github.com/openstax/sifter">Source</a>. <a target="_blank"
@@ -94,9 +93,6 @@
             <li><input type="radio" id="use-cnxml" name="sourceFormat" value="cnxml"/><label for="use-cnxml">Search
                 CNXML</label></li>
         </ul>
-        <label for="show-log">Show Log:</label>
-        <input id="show-log" type="checkbox"/>
-        <br />
         <label for="books">Books to search:</label>
         <br/>
         <select id="books" name="books" multiple="multiple" class="col-sm-8" size="15"></select>

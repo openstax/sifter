@@ -2,529 +2,6 @@
   "api_version": 2,
   "approved_books": [
     {
-      "repository_name": "osbooks-introduction-anthropology",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20220118.185250",
-          "edition": 1,
-          "commit_sha": "79fd480275e5289e7e068b3080943e7bb74388c9",
-          "commit_metadata": {
-            "committed_at": "2022-02-07T17:45:00+00:00",
-            "books": [
-              {
-                "style": "anthropology",
-                "uuid": "cf0085c6-528c-4101-ad26-19c612c5a2fa",
-                "slug": "introduction-anthropology"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-introduction-sociology",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "c28d7c7199fc24ae462e088b395077ab52fc4a78",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "sociology",
-                "uuid": "afe4332a-c97f-4fc4-be27-4e4d384a32d8",
-                "slug": "introduction-sociology"
-              }
-            ]
-          }
-        },
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 2,
-          "commit_sha": "247752b30f009818f9ae90b0e6fe1a0b0fdbac4e",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "sociology",
-                "uuid": "02040312-72c8-441e-a685-20e9333f3e1d",
-                "slug": "introduction-sociology-2e"
-              }
-            ]
-          }
-        },
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 3,
-          "commit_sha": "6a2c2cdf14232a88ac5c6bb3ed0145a27aa7fb2d",
-          "commit_metadata": {
-            "committed_at": "2022-01-28T17:32:00+00:00",
-            "books": [
-              {
-                "style": "sociology",
-                "uuid": "746f171e-0d6a-4ef2-b69d-367880872f4a",
-                "slug": "introduction-sociology-3e"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-psychology",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "8993bfce249fa3865b7ae7f650a2b3ddc119a201",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "psychology",
-                "uuid": "4abf04bf-93a0-45c3-9cbc-2cefd46e68cc",
-                "slug": "psychology"
-              }
-            ]
-          }
-        },
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 2,
-          "commit_sha": "96cb43562ec6ffbb6f2aa53e9ea4e3a84fe121e0",
-          "commit_metadata": {
-            "committed_at": "2022-02-02T17:32:00+00:00",
-            "books": [
-              {
-                "style": "psychology",
-                "uuid": "06aba565-9432-40f6-97ee-b8a361f118a8",
-                "slug": "psychology-2e"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-us-history",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "0d75eb73d129a3485c5f79f75e116c7862f64f3b",
-          "commit_metadata": {
-            "committed_at": "2022-01-28T17:32:00+00:00",
-            "books": [
-              {
-                "style": "history",
-                "uuid": "a7ba2fb8-8925-4987-b182-5f4429d48daa",
-                "slug": "us-history"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-microbiology",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "d5e09f8f4e69795b19a074cdce344f972385165d",
-          "commit_metadata": {
-            "committed_at": "2022-02-02T17:32:00+00:00",
-            "books": [
-              {
-                "style": "microbiology",
-                "uuid": "e42bd376-624b-4c0f-972f-e0c57998e765",
-                "slug": "microbiology"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-university-physics-bundle",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "8ede2bac60636d0cce1469129e16a64f29fb6e71",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "u-physics",
-                "uuid": "d50f6e32-0fda-46ef-a362-9bd36ca7c97d",
-                "slug": "university-physics-volume-1"
-              },
-              {
-                "style": "u-physics",
-                "uuid": "7a0f9770-1c44-4acd-9920-1cd9a99f2a1e",
-                "slug": "university-physics-volume-2"
-              },
-              {
-                "style": "u-physics",
-                "uuid": "af275420-6050-4707-995c-57b9cc13c358",
-                "slug": "university-physics-volume-3"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-prealgebra-bundle",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "eb2e29d69a6af78e64788c1239c3081555b2cefd",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "dev-math",
-                "uuid": "caa57dab-41c7-455e-bd6f-f443cda5519c",
-                "slug": "prealgebra"
-              },
-              {
-                "style": "dev-math",
-                "uuid": "0889907c-f0ef-496a-bcb8-2a5bb121717f",
-                "slug": "elementary-algebra"
-              },
-              {
-                "style": "dev-math",
-                "uuid": "02776133-d49d-49cb-bfaa-67c7f61b25a1",
-                "slug": "intermediate-algebra"
-              }
-            ]
-          }
-        },
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 2,
-          "commit_sha": "97c23b751b406aaa913a66af931176a54b19d65a",
-          "commit_metadata": {
-            "committed_at": "2022-01-28T17:32:00+00:00",
-            "books": [
-              {
-                "style": "dev-math",
-                "uuid": "f0fa90be-fca8-43c9-9aad-715c0a2cee2b",
-                "slug": "prealgebra-2e"
-              },
-              {
-                "style": "dev-math",
-                "uuid": "55931856-c627-418b-a56f-1dd0007683a8",
-                "slug": "elementary-algebra-2e"
-              },
-              {
-                "style": "dev-math",
-                "uuid": "4664c267-cd62-4a99-8b28-1cb9b3aee347",
-                "slug": "intermediate-algebra-2e"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-statistics",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "fb75e632e24c3b6f419873ff9ba30e7746dc2143",
-          "commit_metadata": {
-            "committed_at": "2022-02-02T17:32:00+00:00",
-            "books": [
-              {
-                "style": "statistics",
-                "uuid": "394a1101-fd8f-4875-84fa-55f15b06ba66",
-                "slug": "statistics"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-entrepreneurship",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "371a4ee512200ceac71303012e42e8d95d44cc36",
-          "commit_metadata": {
-            "committed_at": "2022-01-28T17:32:00+00:00",
-            "books": [
-              {
-                "style": "entrepreneurship",
-                "uuid": "d380510e-6145-4625-b19a-4fa68204b6b1",
-                "slug": "entrepreneurship"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-astronomy",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "faae451497734eb5aeda1dfee47005c257acd57c",
-          "commit_metadata": {
-            "committed_at": "2022-01-29T17:32:00+00:00",
-            "books": [
-              {
-                "style": "astronomy",
-                "uuid": "2e737be8-ea65-48c3-aa0a-9f35b4c6a966",
-                "slug": "astronomy"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-physics",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "b682a4b3c370bad60af0a3201a603c9167e20590",
-          "commit_metadata": {
-            "committed_at": "2022-01-28T17:32:00+00:00",
-            "books": [
-              {
-                "style": "hs-physics",
-                "uuid": "cce64fde-f448-43b8-ae88-27705cceb0da",
-                "slug": "physics"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-chemistry-bundle",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "741a7af5c0fed04213fb7cde687675570cc896d1",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "chemistry",
-                "uuid": "85abf193-2bd2-4908-8563-90b8a7ac8df6",
-                "slug": "chemistry"
-              },
-              {
-                "style": "chemistry",
-                "uuid": "4539ae23-1ccc-421e-9b25-843acbb6c4b0",
-                "slug": "chemistry-atoms-first"
-              }
-            ]
-          }
-        },
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 2,
-          "commit_sha": "474e3ea37463145a063eeaf4aaadd8abf38d540e",
-          "commit_metadata": {
-            "committed_at": "2022-02-07T17:32:00+00:00",
-            "books": [
-              {
-                "style": "chemistry",
-                "uuid": "7fccc9cf-9b71-44f6-800b-f9457fd64335",
-                "slug": "chemistry-2e"
-              },
-              {
-                "style": "chemistry",
-                "uuid": "d9b85ee6-c57f-4861-8208-5ddf261e9c5f",
-                "slug": "chemistry-atoms-first-2e"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-calculus-bundle",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "7650bff9425a09fa584f7ee9fb558675bd2efdc5",
-          "commit_metadata": {
-            "committed_at": "2022-02-10T18:20:00+00:00",
-            "books": [
-              {
-                "style": "calculus",
-                "uuid": "8b89d172-2927-466f-8661-01abc7ccdba4",
-                "slug": "calculus-volume-1"
-              },
-              {
-                "style": "calculus",
-                "uuid": "1d39a348-071f-4537-85b6-c98912458c3c",
-                "slug": "calculus-volume-2"
-              },
-              {
-                "style": "calculus",
-                "uuid": "a31cd793-2162-4e9e-acb5-6e6bbd76a5fa",
-                "slug": "calculus-volume-3"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-biology-bundle",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "1dcaf5f3e629f6da1c18793f310af3c488affde4",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "biology",
-                "uuid": "185cbf87-c72e-48f5-b51e-f14f21b5eabd",
-                "slug": "biology"
-              },
-              {
-                "style": "biology",
-                "uuid": "b3c1e1d2-839c-42b0-a314-e119a8aafbdd",
-                "slug": "concepts-biology"
-              },
-              {
-                "style": "ap-biology",
-                "uuid": "6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2",
-                "slug": "biology-ap-courses"
-              }
-            ]
-          }
-        },
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 2,
-          "commit_sha": "879b754391e22a89361f0c4c0e65760a69c490f9",
-          "commit_metadata": {
-            "committed_at": "2022-02-09T17:32:00+00:00",
-            "books": [
-              {
-                "style": "biology",
-                "uuid": "8d50a0af-948b-4204-a71d-4826cba765b8",
-                "slug": "biology-2e"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-anatomy-physiology",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "ccce7805ec4d5fb209a5b48327ffd2ac0e2edc88",
-          "commit_metadata": {
-            "committed_at": "2022-01-28T17:32:00+00:00",
-            "books": [
-              {
-                "style": "anatomy",
-                "uuid": "14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22",
-                "slug": "anatomy-and-physiology"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "repository_name": "osbooks-principles-of-management-bundle",
-      "platforms": [
-        "REX"
-      ],
-      "versions": [
-        {
-          "min_code_version": "20210224.204120",
-          "edition": 1,
-          "commit_sha": "e938aee576d7e29b89977b5596b904f6d8ea7e35",
-          "commit_metadata": {
-            "committed_at": "2022-01-06T17:32:00+00:00",
-            "books": [
-              {
-                "style": "principles-management",
-                "uuid": "c3acb2ab-7d5c-45ad-b3cd-e59673fedd4e",
-                "slug": "principles-management"
-              },
-              {
-                "style": "principles-management",
-                "uuid": "2d941ab9-ac5b-4eb8-b21c-965d36a4f296",
-                "slug": "organizational-behavior"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
       "repository_name": "osbooks-principles-economics-bundle",
       "platforms": [
         "REX"
@@ -533,7 +10,7 @@
         {
           "min_code_version": "20210224.204120",
           "edition": 1,
-          "commit_sha": "444e84e333a10b4d5fca63c2d166331c4a5794f2",
+          "commit_sha": "314942b33c516c70160134c98eb53055a14f3943",
           "commit_metadata": {
             "committed_at": "2022-01-12T17:32:00+00:00",
             "books": [
@@ -594,8 +71,31 @@
               },
               {
                 "style": "economics",
-                "uuid": "636cbfd9-4e37-4575-83ab-9dec9029ca4e",
+                "uuid": "9117cf8c-a8a3-4875-8361-9cb0f1fc9362",
                 "slug": "principles-microeconomics-ap-courses-2e"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "repository_name": "osbooks-statistics",
+      "platforms": [
+        "REX"
+      ],
+      "versions": [
+        {
+          "min_code_version": "20210224.204120",
+          "edition": 1,
+          "commit_sha": "79fff4b86726b716d67ef5a5f8247db25b3567ef",
+          "commit_metadata": {
+            "committed_at": "2022-01-28T17:32:00+00:00",
+            "books": [
+              {
+                "style": "statistics",
+                "uuid": "394a1101-fd8f-4875-84fa-55f15b06ba66",
+                "slug": "statistics"
               }
             ]
           }
@@ -771,9 +271,9 @@
         {
           "min_code_version": "20211111.153520",
           "edition": 2,
-          "commit_sha": "6a2ee838929e5945a4e67c79496a730b2cc269a7",
+          "commit_sha": "970d21eebca11e2838056df5827563f9e0762f5b",
           "commit_metadata": {
-            "committed_at": "2021-02-02T14:45:16+00:00",
+            "committed_at": "2021-12-13T14:45:16+00:00",
             "books": [
               {
                 "style": "precalculus",
@@ -909,6 +409,18 @@
       ]
     },
     {
+      "collection_id": "col11758",
+      "server": "cnx.org",
+      "style": "precalculus",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "13ac107a-f15f-49d2-97e8-60ab2e3b519c",
+          "slug": "algebra-and-trigonometry"
+        }
+      ]
+    },
+    {
       "collection_id": "col11995",
       "server": "cnx.org",
       "style": "american-government",
@@ -945,6 +457,66 @@
       ]
     },
     {
+      "collection_id": "col11496",
+      "server": "cnx.org",
+      "style": "anatomy",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22",
+          "slug": "anatomy-and-physiology"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11992",
+      "server": "cnx.org",
+      "style": "astronomy",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "2e737be8-ea65-48c3-aa0a-9f35b4c6a966",
+          "slug": "astronomy"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11448",
+      "server": "cnx.org",
+      "style": "biology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "185cbf87-c72e-48f5-b51e-f14f21b5eabd",
+          "slug": "biology"
+        }
+      ]
+    },
+    {
+      "collection_id": "col24361",
+      "server": "cnx.org",
+      "style": "biology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "8d50a0af-948b-4204-a71d-4826cba765b8",
+          "slug": "biology-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12078",
+      "server": "cnx.org",
+      "style": "ap-biology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "6c322e32-9fb0-4c4d-a1d7-20c95c5c7af2",
+          "slug": "biology-ap-courses"
+        }
+      ]
+    },
+    {
       "collection_id": "col25722",
       "server": "cnx.org",
       "style": "business-ethics",
@@ -965,6 +537,114 @@
         {
           "uuid": "464a3fba-68c1-426a-99f9-597e739dc911",
           "slug": "business-law-i-essentials"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11964",
+      "server": "cnx.org",
+      "style": "calculus",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "8b89d172-2927-466f-8661-01abc7ccdba4",
+          "slug": "calculus-volume-1"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11965",
+      "server": "cnx.org",
+      "style": "calculus",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "1d39a348-071f-4537-85b6-c98912458c3c",
+          "slug": "calculus-volume-2"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11966",
+      "server": "cnx.org",
+      "style": "calculus",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "a31cd793-2162-4e9e-acb5-6e6bbd76a5fa",
+          "slug": "calculus-volume-3"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11760",
+      "server": "cnx.org",
+      "style": "chemistry",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "85abf193-2bd2-4908-8563-90b8a7ac8df6",
+          "slug": "chemistry"
+        }
+      ]
+    },
+    {
+      "collection_id": "col26069",
+      "server": "cnx.org",
+      "style": "chemistry",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "7fccc9cf-9b71-44f6-800b-f9457fd64335",
+          "slug": "chemistry-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col26488",
+      "server": "cnx.org",
+      "style": "chemistry",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "d9b85ee6-c57f-4861-8208-5ddf261e9c5f",
+          "slug": "chemistry-atoms-first-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12012",
+      "server": "cnx.org",
+      "style": "chemistry",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "4539ae23-1ccc-421e-9b25-843acbb6c4b0",
+          "slug": "chemistry-atoms-first"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11759",
+      "server": "cnx.org",
+      "style": "precalculus",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "9b08c294-057f-4201-9f48-5d6ad992740d",
+          "slug": "college-algebra"
+        }
+      ]
+    },
+    {
+      "collection_id": "col32026",
+      "server": "cnx.org",
+      "style": "precalculus-coreq",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "507feb1e-cfff-4b54-bc07-d52636cecfe3",
+          "slug": "college-algebra-corequisite-support"
         }
       ]
     },
@@ -1005,6 +685,78 @@
       ]
     },
     {
+      "collection_id": "col11487",
+      "server": "cnx.org",
+      "style": "biology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "b3c1e1d2-839c-42b0-a314-e119a8aafbdd",
+          "slug": "concepts-biology"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12116",
+      "server": "cnx.org",
+      "style": "dev-math",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "0889907c-f0ef-496a-bcb8-2a5bb121717f",
+          "slug": "elementary-algebra"
+        }
+      ]
+    },
+    {
+      "collection_id": "col31130",
+      "server": "cnx.org",
+      "style": "dev-math",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "55931856-c627-418b-a56f-1dd0007683a8",
+          "slug": "elementary-algebra-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col29104",
+      "server": "cnx.org",
+      "style": "entrepreneurship",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "d380510e-6145-4625-b19a-4fa68204b6b1",
+          "slug": "entrepreneurship"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12119",
+      "server": "cnx.org",
+      "style": "dev-math",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "02776133-d49d-49cb-bfaa-67c7f61b25a1",
+          "slug": "intermediate-algebra"
+        }
+      ]
+    },
+    {
+      "collection_id": "col31234",
+      "server": "cnx.org",
+      "style": "dev-math",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "4664c267-cd62-4a99-8b28-1cb9b3aee347",
+          "slug": "intermediate-algebra-2e"
+        }
+      ]
+    },
+    {
       "collection_id": "col32642",
       "server": "cnx.org",
       "style": "business-ethics",
@@ -1013,6 +765,198 @@
         {
           "uuid": "1b4ee0ce-ee89-44fa-a5e7-a0db9f0c94b1",
           "slug": "introduction-intellectual-property"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11407",
+      "server": "cnx.org",
+      "style": "sociology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "afe4332a-c97f-4fc4-be27-4e4d384a32d8",
+          "slug": "introduction-sociology"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11762",
+      "server": "cnx.org",
+      "style": "sociology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "02040312-72c8-441e-a685-20e9333f3e1d",
+          "slug": "introduction-sociology-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col32649",
+      "server": "cnx.org",
+      "style": "sociology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "746f171e-0d6a-4ef2-b69d-367880872f4a",
+          "slug": "introduction-sociology-3e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12087",
+      "server": "cnx.org",
+      "style": "microbiology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "e42bd376-624b-4c0f-972f-e0c57998e765",
+          "slug": "microbiology"
+        }
+      ]
+    },
+    {
+      "collection_id": "col29124",
+      "server": "cnx.org",
+      "style": "principles-management",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "2d941ab9-ac5b-4eb8-b21c-965d36a4f296",
+          "slug": "organizational-behavior"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12081",
+      "server": "cnx.org",
+      "style": "hs-physics",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "cce64fde-f448-43b8-ae88-27705cceb0da",
+          "slug": "physics"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11756",
+      "server": "cnx.org",
+      "style": "dev-math",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "caa57dab-41c7-455e-bd6f-f443cda5519c",
+          "slug": "prealgebra"
+        }
+      ]
+    },
+    {
+      "collection_id": "col30939",
+      "server": "cnx.org",
+      "style": "dev-math",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "f0fa90be-fca8-43c9-9aad-715c0a2cee2b",
+          "slug": "prealgebra-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11667",
+      "server": "cnx.org",
+      "style": "precalculus",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "fd53eae1-fa23-47c7-bb1b-972349835c3c",
+          "slug": "precalculus"
+        }
+      ]
+    },
+    {
+      "collection_id": "col28330",
+      "server": "cnx.org",
+      "style": "principles-management",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "c3acb2ab-7d5c-45ad-b3cd-e59673fedd4e",
+          "slug": "principles-management"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11629",
+      "server": "cnx.org",
+      "style": "psychology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "4abf04bf-93a0-45c3-9cbc-2cefd46e68cc",
+          "slug": "psychology"
+        }
+      ]
+    },
+    {
+      "collection_id": "col31502",
+      "server": "cnx.org",
+      "style": "psychology",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "06aba565-9432-40f6-97ee-b8a361f118a8",
+          "slug": "psychology-2e"
+        }
+      ]
+    },
+    {
+      "collection_id": "col11740",
+      "server": "cnx.org",
+      "style": "history",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "a7ba2fb8-8925-4987-b182-5f4429d48daa",
+          "slug": "us-history"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12031",
+      "server": "cnx.org",
+      "style": "u-physics",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "d50f6e32-0fda-46ef-a362-9bd36ca7c97d",
+          "slug": "university-physics-volume-1"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12074",
+      "server": "cnx.org",
+      "style": "u-physics",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "7a0f9770-1c44-4acd-9920-1cd9a99f2a1e",
+          "slug": "university-physics-volume-2"
+        }
+      ]
+    },
+    {
+      "collection_id": "col12067",
+      "server": "cnx.org",
+      "style": "u-physics",
+      "tutor_only": false,
+      "books": [
+        {
+          "uuid": "af275420-6050-4707-995c-57b9cc13c358",
+          "slug": "university-physics-volume-3"
         }
       ]
     }
@@ -1114,6 +1058,16 @@
       "min_code_version": "20210224.204120"
     },
     {
+      "collection_id": "col11758",
+      "content_version": "1.37.4",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11758",
+      "content_version": "1.33.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
       "collection_id": "col11995",
       "content_version": "1.19.2",
       "min_code_version": "20210224.204120"
@@ -1121,6 +1075,51 @@
     {
       "collection_id": "col26739",
       "content_version": "1.6.11",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11496",
+      "content_version": "1.22.38",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11496",
+      "content_version": "1.22.8",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11992",
+      "content_version": "1.22.66",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11992",
+      "content_version": "1.22.49",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11448",
+      "content_version": "1.14.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col24361",
+      "content_version": "1.17.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col24361",
+      "content_version": "1.16.179",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12078",
+      "content_version": "1.29.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12078",
+      "content_version": "1.28.15",
       "min_code_version": "20210224.204120"
     },
     {
@@ -1144,6 +1143,86 @@
       "min_code_version": "20210224.204120"
     },
     {
+      "collection_id": "col11964",
+      "content_version": "1.25.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11964",
+      "content_version": "1.24.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11965",
+      "content_version": "1.25.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11965",
+      "content_version": "1.24.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11966",
+      "content_version": "1.25.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11966",
+      "content_version": "1.24.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11760",
+      "content_version": "1.13.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col26069",
+      "content_version": "1.19.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col26069",
+      "content_version": "1.18.78",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col26488",
+      "content_version": "1.16.7",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col26488",
+      "content_version": "1.16.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12012",
+      "content_version": "1.10.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11759",
+      "content_version": "1.35.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11759",
+      "content_version": "1.32.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col32026",
+      "content_version": "1.13.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col32026",
+      "content_version": "1.10.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
       "collection_id": "col11406",
       "content_version": "1.23.42",
       "min_code_version": "20210224.204120"
@@ -1151,11 +1230,6 @@
     {
       "collection_id": "col11406",
       "content_version": "1.23.18",
-      "min_code_version": "20210224.204120"
-    },
-    {
-      "collection_id": "col11406",
-      "content_version": "1.23.55",
       "min_code_version": "20210224.204120"
     },
     {
@@ -1169,11 +1243,6 @@
       "min_code_version": "20210224.204120"
     },
     {
-      "collection_id": "col11844",
-      "content_version": "1.41.11",
-      "min_code_version": "20210224.204120"
-    },
-    {
       "collection_id": "col30990",
       "content_version": "1.10.4",
       "min_code_version": "20210224.204120"
@@ -1184,6 +1253,61 @@
       "min_code_version": "20210224.204120"
     },
     {
+      "collection_id": "col11487",
+      "content_version": "1.18.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11487",
+      "content_version": "1.17.23",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12116",
+      "content_version": "1.9.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12116",
+      "content_version": "1.9.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col31130",
+      "content_version": "1.11.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col31130",
+      "content_version": "1.9.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col29104",
+      "content_version": "1.12.10",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col29104",
+      "content_version": "1.12.7",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12119",
+      "content_version": "1.14.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col31234",
+      "content_version": "1.9.5",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col31234",
+      "content_version": "1.7.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
       "collection_id": "col32642",
       "content_version": "1.6.3",
       "min_code_version": "20210224.204120"
@@ -1191,6 +1315,146 @@
     {
       "collection_id": "col32642",
       "content_version": "1.6.21",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11407",
+      "content_version": "1.18.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11762",
+      "content_version": "1.15.10",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11762",
+      "content_version": "1.15.7",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col32649",
+      "content_version": "1.4.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col32649",
+      "content_version": "1.3.19",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12087",
+      "content_version": "1.9.34",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12087",
+      "content_version": "1.9.13",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col29124",
+      "content_version": "1.12.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col29124",
+      "content_version": "1.9.8",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12081",
+      "content_version": "1.14.43",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11756",
+      "content_version": "1.21.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col30939",
+      "content_version": "1.15.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col30939",
+      "content_version": "1.11.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11667",
+      "content_version": "1.39.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11667",
+      "content_version": "1.36.3",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col28330",
+      "content_version": "1.14.4",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col28330",
+      "content_version": "1.12.8",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11629",
+      "content_version": "1.13.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col31502",
+      "content_version": "1.6.4",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col31502",
+      "content_version": "1.4.18",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11740",
+      "content_version": "1.12.30",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col11740",
+      "content_version": "1.12.24",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12031",
+      "content_version": "1.26.4",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12031",
+      "content_version": "1.26.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12074",
+      "content_version": "1.34.2",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12074",
+      "content_version": "1.27.1",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12067",
+      "content_version": "1.25.10",
+      "min_code_version": "20210224.204120"
+    },
+    {
+      "collection_id": "col12067",
+      "content_version": "1.25.8",
       "min_code_version": "20210224.204120"
     },
     {

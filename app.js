@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
      const TESTED_ABL_VERSION = 2
-     const ablUrl = 'https://raw.githubusercontent.com/openstax/content-manager-approved-books/main/approved-book-list.json'
+     const ablUrl = '/content-manager-approved-books/approved-book-list.json'
      const legacyServerRootUrl = 'https://archive-staging.cnx.org/contents'
      const legacyRoot = 'https://legacy.cnx.org/content'
      const openstaxGithubURL = 'https://openstax.github.io'
@@ -38,7 +38,6 @@ window.addEventListener('load', () => {
      const validationMessageEl = qs('#validation-message')
      const form = qs('form')
      const sourceFormat = form.elements['sourceFormat']
-     const showLogEl = qs("#show-log")
      
      const errors = qs('#errors')
      const errorLogLabel = qs('#errorLogLabel')
@@ -55,7 +54,7 @@ window.addEventListener('load', () => {
      }
      
      async function fetchWithBackoff(url, useJson) {
-          
+     
           for (var _ of times(3)) {
                try {
                     return await fetchWithError(url, useJson)
@@ -74,26 +73,23 @@ window.addEventListener('load', () => {
           }
      }
      
-     function printErrorToUser(err, url) {
-          if (showLogEl.checked) {
-               errorLogLabel.classList = ''
-               let li = document.createElement('li')
-               let time = new Date().toLocaleTimeString()
-               if (url) {
-                    li.innerHTML = `${time} ::: ${err}: <a href="${url}">${url}</a>`
-               } else {
-                    li.innerHTML = `${time} ::: ${err}`
-               }
-               errors.append(li)
-          }
+     function printErrorToUser(err,url){
+          let li = document.createElement('li')
+          
+          
+          let time = new Date().toLocaleTimeString()
+          if(url)
+               li.innerHTML = `${time} ::: ${err}: <a href="${url}">${url}</a>`
+          else
+               li.innerHTML = `${time} ::: ${err}`
+          errors.append(li)
      }
-     
      async function fetchWithError(url, useJSON) {
           try {
                let response = await fetch(url)
                if (!response.ok) // or check for response.status
                     throw new Error(response.statusText);
-               if (useJSON)
+               if(useJSON)
                     return await response.json();
                else
                     return await response.text();
@@ -177,6 +173,7 @@ window.addEventListener('load', () => {
           const bookUuids = getSelectedBookUUIDs()
           
           resultsLabel.classList = ''
+          errorLogLabel.classList = ''
           
           // clear
           isStopping = false
@@ -233,13 +230,13 @@ window.addEventListener('load', () => {
                               try {
                                    //Find the right book.json file and exit the loop
                                    bookJson = await fetchWithBackoff(bookUrl, true)
-                                   if (bookJson != null && bookJson.title != null) break
+                                   if (bookJson!=null && bookJson.title!=null) break
                               } catch (error) {
                                    console.error(error)
                                    continue;
                               }
                          }
-                         if (bookJson != null && bookJson.title != null) break
+                         if (bookJson!=null && bookJson.title!=null) break
                     }
                } else bookJson = await fetchWithBackoff(bookUrl, true)
                
@@ -248,7 +245,7 @@ window.addEventListener('load', () => {
                
                
                if (bookJson == null) {
-                    printErrorToUser(`Could not find a baked version of ${bookUuid}. Book details: ${JSON.stringify(book)}`, null)
+                    printErrorToUser(`Could not find a baked version of ${bookUuid}. Book details: ${JSON.stringify(book)}`,null)
                     continue
                }
                bookTitleEl.textContent = bookJson.title
@@ -309,8 +306,8 @@ window.addEventListener('load', () => {
                                    break
                               }
                               pageRef.id = !legacyBook ? pageRef.id.replace("@", '') : pageRef.id
-                              const pageUrl = `${bookUrl}:${pageRef.id}`
-                              const pageJson = await fetchWithBackoff(`${pageUrl}${(!legacyBook ? '.json' : '')}`, true)
+                              const pageUrl = `${bookUrl}:${pageRef.id}` + (!legacyBook ? '.json' : '')
+                              const pageJson = await fetchWithBackoff(`${pageUrl}`, true)
                               
                               analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
                               
@@ -323,9 +320,7 @@ window.addEventListener('load', () => {
                                    sourceCode = await fetchWithBackoff(`https://archive-staging.cnx.org/resources/${moduleResource.id}`, false)
                                    sourceCode = sourceCode.replace('<?xml version="1.0"?>', '')
                               } else {
-                                   if (bookJson) {
-                                        sourceCode = pageJson.content
-                                   } else continue;
+                                   sourceCode = pageJson.content
                               }
                               
                               const matches = findMatches(selector, sourceCode)
