@@ -221,6 +221,10 @@ window.addEventListener('load', () => {
                if (!legacyBook) {
                     //Download the book.xml from Github
                     bookXML = await fetchWithBackoff(`${openstaxGithubURL}/${book.repository_name}/META-INF/books.xml`, false)
+                    // the bookXml is null when the repository is private, We will skip to the next book in that case
+                    if(!bookXML) {
+                         continue;
+                    }
                     sandboxEl.innerHTML = bookXML.replace(/ src=/g, ' data-src=')
                     //List of collection.xml files
                     collectionXMLLinks = Array.from(sandboxEl.querySelectorAll("book[href]"), e => e.attributes.getNamedItem('href').value)
