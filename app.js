@@ -1,8 +1,6 @@
 window.addEventListener('load', () => {
      const TESTED_ABL_VERSION = 2
      const ablUrl = 'https://raw.githubusercontent.com/openstax/content-manager-approved-books/main/approved-book-list.json'
-     const legacyServerRootUrl = 'https://archive-staging.cnx.org/contents'
-     const legacyRoot = 'https://legacy.cnx.org/content'
      const openstaxGithubURL = 'https://openstax.github.io'
      const githubServerURL = 'https://github.com/openstax/'
      const s3RootUrl = 'https://openstax.org/apps/archive'
@@ -72,6 +70,7 @@ window.addEventListener('load', () => {
                console.log(`Bad url ${url}`)
                printErrorToUser(err, url)
           }
+          return null
      }
      
      function printErrorToUser(err, url) {
@@ -194,9 +193,6 @@ window.addEventListener('load', () => {
                //Retrieve the book object from local storage
                const book = JSON.parse(window.localStorage.getItem(bookUuid))
                //Find the book type
-               const bookType = book.repository_name ? 'github' : (book.collection_id ? 'legacy' : null)
-               if (!bookType) continue
-               const legacyBook = bookType === 'legacy'
                let totalMatches = 0
                isSkipping = false
                
@@ -215,37 +211,35 @@ window.addEventListener('load', () => {
                detailsEl.append(bookResultsEl)
                resultsEl.prepend(t1)
                
-               let bookUrl = legacyBook ? `${legacyServerRootUrl}/${book.books[0].uuid}` : null
+               let bookUrl = null
                let bookJson = null
                let collectionXMLLinks
-               if (!legacyBook) {
-                    //Download the book.xml from Github
-                    bookXML = await fetchWithBackoff(`${openstaxGithubURL}/${book.repository_name}/META-INF/books.xml`, false)
-                    // the bookXml is null when the repository is private, We will skip to the next book in that case
-                    if(!bookXML) {
-                         continue;
-                    }
-                    sandboxEl.innerHTML = bookXML.replace(/ src=/g, ' data-src=')
-                    //List of collection.xml files
-                    collectionXMLLinks = Array.from(sandboxEl.querySelectorAll("book[href]"), e => e.attributes.getNamedItem('href').value)
-                    const pipelines = JSON.parse(window.localStorage.getItem('pipelines'))
-                    const commit_shas = []
-                    book.versions.forEach(v => commit_shas.push(v.commit_sha.substring(0, 7)))
-                    for (let pipeline of pipelines) {
-                         for (let commitSha of commit_shas) {
-                              bookUrl = `${s3RootUrl}/${pipeline}/contents/${bookUuid}@${commitSha}.json`
-                              try {
-                                   //Find the right book.json file and exit the loop
-                                   bookJson = await fetchWithBackoff(bookUrl, true)
-                                   if (bookJson != null && bookJson.title != null) break
-                              } catch (error) {
-                                   console.error(error)
-                                   continue;
-                              }
+               //Download the book.xml from Github
+               bookXML = await fetchWithBackoff(`${openstaxGithubURL}/${book.repository_name}/META-INF/books.xml`, false)
+               // the bookXml is null when the repository is private, We will skip to the next book in that case
+               if(!bookXML) {
+                    continue;
+               }
+               sandboxEl.innerHTML = bookXML.replace(/ src=/g, ' data-src=')
+               //List of collection.xml files
+               collectionXMLLinks = Array.from(sandboxEl.querySelectorAll("book[href]"), e => e.attributes.getNamedItem('href').value)
+               const pipelines = JSON.parse(window.localStorage.getItem('pipelines'))
+               const commit_shas = []
+               book.versions.forEach(v => commit_shas.push(v.commit_sha.substring(0, 7)))
+               for (let pipeline of pipelines) {
+                    for (let commitSha of commit_shas) {
+                         bookUrl = `${s3RootUrl}/${pipeline}/contents/${bookUuid}@${commitSha}.json`
+                         try {
+                              //Find the right book.json file and exit the loop
+                              bookJson = await fetchWithBackoff(bookUrl, true)
+                              if (bookJson != null && bookJson.title != null) break
+                         } catch (error) {
+                              console.error(error)
+                              continue;
                          }
-                         if (bookJson != null && bookJson.title != null) break
                     }
-               } else bookJson = await fetchWithBackoff(bookUrl, true)
+                    if (bookJson != null && bookJson.title != null) break
+               }
                
                
                analyzeFn('BOOK:START', bookJson, bookUuid)
@@ -257,8 +251,7 @@ window.addEventListener('load', () => {
                }
                bookTitleEl.textContent = bookJson.title
                bookUrl = bookUrl.replace('.json', '')
-               //Currently trying to merge the cnxml process for legacy with the one for Github books. Will get back to this later
-               if (!legacyBook && sourceFormat.value === 'cnxml') {
+               if (sourceFormat.value === 'cnxml') {
                     for (let link of collectionXMLLinks) {
                          link = link.replace("../", "")
                          let collectionXML = await fetchWithBackoff(`${openstaxGithubURL}/${book.repository_name}/${link}`, false)
@@ -312,25 +305,16 @@ window.addEventListener('load', () => {
                               if (i >= stopAfterNPagesCount) {
                                    break
                               }
-                              pageRef.id = !legacyBook ? pageRef.id.replace("@", '') : pageRef.id
+                              pageRef.id = pageRef.id.replace("@", '')
                               const pageUrl = `${bookUrl}:${pageRef.id}`
-                              const pageJson = await fetchWithBackoff(`${pageUrl}${(!legacyBook ? '.json' : '')}`, true)
+                              const pageJson = await fetchWithBackoff(`${pageUrl}.json`, true)
                               
                               analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
                               
                               let sourceCode
-                              if (legacyBook && sourceFormat.value === 'cnxml') {
-                                   const moduleResource = pageJson.resources.filter(r => r.filename === 'index.cnxml')[0]
-                                   if (!moduleResource) {
-                                        continue
-                                   }
-                                   sourceCode = await fetchWithBackoff(`https://archive-staging.cnx.org/resources/${moduleResource.id}`, false)
-                                   sourceCode = sourceCode.replace('<?xml version="1.0"?>', '')
-                              } else {
-                                   if (bookJson) {
-                                        sourceCode = pageJson.content
-                                   } else continue;
-                              }
+                              if (bookJson) {
+                                   sourceCode = pageJson.content
+                              } else continue;
                               
                               const matches = findMatches(selector, sourceCode)
                               totalMatches += matches.length
@@ -344,10 +328,10 @@ window.addEventListener('load', () => {
                                    const nodeValue = getNodeValue(match)
                                    
                                    const li = document.createElement('li')
-                                   const moduleInfo = legacyBook ? (pageJson.legacy_id ? `<a target="_blank" href="${legacyRoot}/${pageJson.legacy_id}/latest/#${nearestId}">${pageJson.legacy_id}</a> ` : '') : ''
+                                   const moduleInfo = ''
                                    
                                    try {
-                                        li.innerHTML = legacyBook ? `${moduleInfo}${pageJson.title} <a target="_blank" href="${pageUrl}.html#${nearestId}">${nodeValue}</a>` : `${pageJson.title} <a target="_blank" href="${pageUrl}.xhtml#${nearestId}">${nodeValue}</a>`
+                                        li.innerHTML = `${pageJson.title} <a target="_blank" href="${pageUrl}.xhtml#${nearestId}">${nodeValue}</a>`
                                    } catch (e) {
                                         console.error(e)
                                         console.log('invalid XML')
