@@ -28,15 +28,11 @@ window.addEventListener('load', () => {
      const skipEl = qs('#skip')
      const resultsEl = qs('#results')
      const sandboxEl = qs('#sandbox')
-     const stopAfterOneEl = qs('#stop-after-one')
      const bookCountEl = qs('#book-count')
-     const analyzeCodeEl = qs('#analyze-code')
-     const stopAfterNPages = qs('#stop-after-n-pages')
      const booksEl = qs('#books')
      const validationMessageEl = qs('#validation-message')
      const form = qs('form')
      const sourceFormat = form.elements['sourceFormat']
-     const showLogEl = qs("#show-log")
      
      const errors = qs('#errors')
      const errorLogLabel = qs('#errorLogLabel')
@@ -48,12 +44,27 @@ window.addEventListener('load', () => {
      
      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
      
+     function dom(tagName, attrs = {}, children = [], handlers = {}) {
+          let el
+          // The first argument can be a string or an element
+          if (typeof tagName === 'string')
+               el = document.createElement(tagName)
+          else
+               el = tagName
+          for (const [key, value] in Object.entries(attrs))
+               el.setAttribute(key, value)
+          for (const [key, value] in Object.entries(handlers))
+               el.addEventListener(key, value)
+          for (const child of children)
+               el.append(child)
+          return el
+     }
+
      function* times(x) {
           for (var i = 0; i < x; i++) yield i;
      }
      
      async function fetchWithBackoff(url, useJson) {
-          
           for (var _ of times(3)) {
                try {
                     return await fetchWithError(url, useJson)
@@ -63,28 +74,19 @@ window.addEventListener('load', () => {
                }
                await sleep(300)
           }
-          try {
-               return await fetchWithError(url, useJson)
-          } catch (err) {
-               console.error(err)
-               console.log(`Bad url ${url}`)
-               printErrorToUser(err, url)
-          }
           return null
      }
      
      function printErrorToUser(err, url) {
-          if (showLogEl.checked) {
-               errorLogLabel.classList = ''
-               let li = document.createElement('li')
-               let time = new Date().toLocaleTimeString()
-               if (url) {
-                    li.innerHTML = `${time} ::: ${err}: <a href="${url}">${url}</a>`
-               } else {
-                    li.innerHTML = `${time} ::: ${err}`
-               }
-               errors.append(li)
+          errorLogLabel.classList = ''
+          let li = document.createElement('li')
+          let time = new Date().toLocaleTimeString()
+          if (url) {
+               li.innerHTML = `${time} ::: ${err}: <a href="${url}">${url}</a>`
+          } else {
+               li.innerHTML = `${time} ::: ${err}`
           }
+          errors.append(li)
      }
      
      async function fetchWithError(url, useJSON) {
@@ -105,7 +107,7 @@ window.addEventListener('load', () => {
      
      let isValid = false
      
-     function getSelectedBookUUIDs() {
+     function getSelectedBooks() {
           return Array.from(booksEl.querySelectorAll("option:checked"), e => e.value)
      }
      
@@ -113,19 +115,17 @@ window.addEventListener('load', () => {
           if (sourceFormat.value !== 'xhtml' && sourceFormat.value !== 'cnxml') {
                return 'Choose a format to search: XHTML or CNXML'
           }
-          if (getSelectedBookUUIDs().length === 0) {
+          if (getSelectedBooks().length === 0) {
                return 'Select at least one book'
           }
           const selector = selectorEl.value
-          if (selector[0] === '/') {
-               // validate it as an XPath (ensure it begins with "/h:")
-               if (/^\/[h,c,m]:/.test(selector) || /^\/\/[h,c,m]:/.test(selector)) {
-                    try {
-                         document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
-                         return '' // valid!
-                    } catch (e) {
-                         return 'Malformed XPath selector'
-                    }
+          // validate it as an XPath (ensure it begins with "/h:" or "//h:")
+          if (/^\/{1,2}[h,c,m]:/.test(selector)) {
+               try {
+                    document.evaluate(selector, sandboxEl, xpathNamespaceResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
+                    return '' // valid!
+               } catch (e) {
+                    return 'Malformed XPath selector'
                }
           }
           // Try validating this as a CSS selector
@@ -171,9 +171,8 @@ window.addEventListener('load', () => {
           // Remember if there was a match (maybe find the nearest id attribute)
           
           const selector = selectorEl.value
-          const analyzeFn = new Function('type', 'json', 'bookUuid', 'pageUuid', analyzeCodeEl.value)
           
-          const bookUuids = getSelectedBookUUIDs()
+          const selectedBooks = getSelectedBooks()
           
           resultsLabel.classList = ''
           
@@ -189,7 +188,7 @@ window.addEventListener('load', () => {
           skipEl.disabled = false
           
           // these are done in parallel
-          for (const bookUuid of bookUuids) {
+          for (const bookUuid of selectedBooks) {
                //Retrieve the book object from local storage
                const book = JSON.parse(window.localStorage.getItem(bookUuid))
                //Find the book type
@@ -242,7 +241,6 @@ window.addEventListener('load', () => {
                }
                
                
-               analyzeFn('BOOK:START', bookJson, bookUuid)
                
                
                if (bookJson == null) {
@@ -297,19 +295,10 @@ window.addEventListener('load', () => {
                          try {
                               const i = pageRefs.indexOf(pageRef)
                               
-                              // Check this in the loop so that users can update the value while this is running
-                              let stopAfterNPagesCount = Number.parseInt(stopAfterNPages.value)
-                              if (Number.isNaN(stopAfterNPagesCount)) {
-                                   stopAfterNPagesCount = Number.POSITIVE_INFINITY
-                              }
-                              if (i >= stopAfterNPagesCount) {
-                                   break
-                              }
                               pageRef.id = pageRef.id.replace("@", '')
                               const pageUrl = `${bookUrl}:${pageRef.id}`
                               const pageJson = await fetchWithBackoff(`${pageUrl}.json`, true)
                               
-                              analyzeFn('PAGE', pageJson, bookUuid, pageRef.id)
                               
                               let sourceCode
                               if (bookJson) {
@@ -340,11 +329,6 @@ window.addEventListener('load', () => {
                               }
                               
                               
-                              if (matches.length > 0 && stopAfterOneEl.checked) {
-                                   // go to the next book
-                                   isSkipping = true
-                              }
-                              
                               // Break when stop button is pressed
                               if (isStopping) {
                                    selectorEl.disabled = false
@@ -364,7 +348,6 @@ window.addEventListener('load', () => {
                          
                     }
                }
-               analyzeFn('BOOK:END', bookJson, bookUuid)
                
                
           }
