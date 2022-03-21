@@ -247,6 +247,9 @@ window.addEventListener('load', () => {
           booksEl.disabled = true
           stopEl.disabled = false
           skipEl.disabled = false
+          sourceFormat.forEach(el => {
+               el.disabled = true
+          })
           
           // these are done in parallel
           for (const bookUrl of selectedUrls) {
@@ -315,6 +318,9 @@ window.addEventListener('load', () => {
           booksEl.disabled = false
           stopEl.disabled = true
           skipEl.disabled = true
+          sourceFormat.forEach(el => {
+               el.disabled = false
+          })
           
      }
      
@@ -343,6 +349,9 @@ window.addEventListener('load', () => {
                     startEl.disabled = false
                     stopEl.disabled = true
                     skipEl.disabled = true
+                    sourceFormat.forEach(el => {
+                         el.disabled = false
+                    })
                })
           }
      }
@@ -415,13 +424,16 @@ window.addEventListener('load', () => {
           
      }, err => alert(`Problem getting the approved book list. Maybe you are offline or the URL has moved. '${ablUrl}'`))
      
+     const compareStrings = (a, b) => a < b ? -1 : a > b ? 1 : 0
+     const compareKeys = ([a], [b]) => compareStrings(a, b)
+     const compareRepoNames = ({repoName: a}, {repoName: b}) => compareStrings(a, b)
      async function populateBookList() {
           if (sourceFormat.value === 'xhtml') {
                const loadedAndFailedBooks = [
                     ...failedBooks,
                     ...loadedBooks
                ]
-               dom(booksEl, {}, loadedAndFailedBooks.map(([slug, {url, error}]) => {
+               dom(booksEl, {}, loadedAndFailedBooks.sort(compareKeys).map(([slug, {url, error}]) => {
                     bookUrlMapping.set(url, slug)
                     if (error)
                          return dom('option', {value: url, disabled: true}, [`${slug} Error: ${error}`])
@@ -429,7 +441,7 @@ window.addEventListener('load', () => {
                          return dom('option', {value: url, selected: true}, [slug])
                }))
           } else if (sourceFormat.value === 'cnxml') {
-               dom(booksEl, {}, loadedRepos.map(({repoName, url, error}) => {
+               dom(booksEl, {}, loadedRepos.sort(compareRepoNames).map(({repoName, url, error}) => {
                     bookUrlMapping.set(url, repoName)
                     if (error)
                          return dom('option', {value: url, disabled: true}, [`${repoName} Error: ${error}`])
