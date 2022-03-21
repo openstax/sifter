@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
      const openstaxGithubURL = 'https://openstax.github.io'
      const githubServerURL = 'https://github.com/openstax/'
      const s3RootUrl = 'https://openstax.org/apps/archive'
+     const rexPreviewPrefix = 'https://rex-web.herokuapp.com/books'
      const namespacePrefixes = {
           'c' : 'http://cnx.rice.edu/cnxml',
           'cnx' : 'http://cnx.rice.edu/cnxml',
@@ -13,7 +14,7 @@ window.addEventListener('load', () => {
           'mml' : 'http://www.w3.org/1998/Math/MathML',
           'mathml' : 'http://www.w3.org/1998/Math/MathML'
      }
-     
+
      const qs = (sel) => {
           const el = document.querySelector(sel)
           if (!el) {
@@ -38,7 +39,7 @@ window.addEventListener('load', () => {
      const errorLogLabel = qs('#errorLogLabel')
      const resultsLabel = qs('#resultsLabel')
      
-     const bookUrlMapping = new Map() // Map<url, repoOrSlug>
+     const bookUrlInfoMapping = new Map() // Map<url, repoOrSlug>
      let isStopping = false
      let isSkipping = false
      bookCountEl.setAttribute('href', ablUrl)
@@ -173,14 +174,14 @@ window.addEventListener('load', () => {
           return new URL(href, baseFile).toString()
      }
 
-     const getPageUrls = async (format, bookUrl) => {
+     const getPageUrls = async (format, bookUrl, bookInfo) => {
           if (format === 'xhtml') {
                const bookJson = await fetchWithBackoff(bookUrl, true)
                const pageUuids = []
                recLeafPages(pageUuids, bookJson.tree)
                const pageUrls = pageUuids.map(pageUuid => {
                     const parseUrl = bookUrl.replace('.json', `:${pageUuid.replace('@', '')}.json`)
-                    const viewUrl = parseUrl.replace('.json', '.xhtml')
+                    const viewUrl = `${rexPreviewPrefix}/${bookInfo.uuid}@${bookInfo.shortSha}/pages/${pageUuid}?archive=${s3RootUrl}/${bookInfo.pipeline}`
                     return {parseUrl, viewUrl}
                })
                return pageUrls
@@ -255,7 +256,7 @@ window.addEventListener('load', () => {
           for (const bookUrl of selectedUrls) {
                if (isStopping) break
 
-               const pageUrls = await getPageUrls(sourceFormat.value, bookUrl) // Array<{parseUrl, viewUrl}>
+               const pageUrls = await getPageUrls(sourceFormat.value, bookUrl, bookUrlInfoMapping.get(bookUrl)) // Array<{parseUrl, viewUrl}>
 
                //Find the book type
                let totalMatches = 0
@@ -292,7 +293,7 @@ window.addEventListener('load', () => {
                     const pageTitleEl = sandboxEl.querySelector("title") // findMatches populates sandboxEl
                     let pageTitle = title ? title : pageTitleEl ? pageTitleEl.innerHTML : parseUrl
                     totalMatches += matches.length
-                    bookLogEl.textContent = `${bookUrlMapping.get(bookUrl) || bookUrl} (${i + 1}/${pageUrls.length}. Found ${totalMatches})`
+                    bookLogEl.textContent = `${bookUrlInfoMapping.get(bookUrl)?.slug || bookUrl} (${i + 1}/${pageUrls.length}. Found ${totalMatches})`
                     // Add a list of links to the matched elements
                     for (const match of matches) {
                          detailsEl.classList.add('found-matches')
@@ -301,9 +302,8 @@ window.addEventListener('load', () => {
                          const nodeValue = getNodeValue(match)
                          
                          const li = document.createElement('li')
-                         //Issue With how to rewrite the redirection URL to the right cnxml file attribute
                          try {
-                              li.innerHTML = `${pageTitle} <a target="_blank" href="${viewUrl}#${nearestId}">${nodeValue}</a>`
+                              li.innerHTML = `<a target="_blank" href="${viewUrl}#${nearestId}">${pageTitle} : ${nodeValue}</a>`
                          } catch (e) {
                               error('Invalid XML', parseUrl)
                               continue
@@ -408,7 +408,7 @@ window.addEventListener('load', () => {
                          const url = `${s3RootUrl}/${pipeline}/contents/${uuid}@${shortSha}.json`
                          const bookJson = fetchWithBackoff(url, true)
                          if (bookJson) {
-                              loadedBooks.set(slug, {url})
+                              loadedBooks.set(slug, {url, pipeline, uuid, shortSha})
                               failedBooks.delete(slug)
                          } else {
                               failedBooks.set(slug, {url, error: 'Could not find book in S3'})
@@ -433,8 +433,8 @@ window.addEventListener('load', () => {
                     ...failedBooks,
                     ...loadedBooks
                ]
-               dom(booksEl, {}, loadedAndFailedBooks.sort(compareKeys).map(([slug, {url, error}]) => {
-                    bookUrlMapping.set(url, slug)
+               dom(booksEl, {}, loadedAndFailedBooks.sort(compareKeys).map(([slug, {url, pipeline, uuid, shortSha, error}]) => {
+                    bookUrlInfoMapping.set(url, {slug, url, pipeline, uuid, shortSha})
                     if (error)
                          return dom('option', {value: url, disabled: true}, [`${slug} Error: ${error}`])
                     else
@@ -442,7 +442,7 @@ window.addEventListener('load', () => {
                }))
           } else if (sourceFormat.value === 'cnxml') {
                dom(booksEl, {}, loadedRepos.sort(compareRepoNames).map(({repoName, url, error}) => {
-                    bookUrlMapping.set(url, repoName)
+                    bookUrlInfoMapping.set(url, {slug: repoName})
                     if (error)
                          return dom('option', {value: url, disabled: true}, [`${repoName} Error: ${error}`])
                     else
