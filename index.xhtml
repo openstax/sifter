@@ -64,44 +64,25 @@
             <div id="validation-message"></div>
             <input name="q" id="selector" placeholder="CSS or XPath (//h:*) Selector" class="col-sm-6"/>
             <button type="submit" id="start">Start</button>
-            <button id="stop" disabled="disabled">Stop</button>
-            <button id="skip" disabled="disabled">Skip</button>
         </div>
-        <label for="stop-after-one">Stop after one is found (faster):</label>
-        <input id="stop-after-one" type="checkbox"/>
         <br/>
-        <label for="stop-after-n-pages">Stop after the first N pages (faster):</label>
-        <input id="stop-after-n-pages" type="number"/>
-        <br/>
-        <label for="advanced-toggle">Run custom JavaScript for each Book/Page</label>
-        <input id="advanced-toggle" type="checkbox"/>
-        <div id="advanced-area">
-            <br/>
-            <p>The arguments available are:</p>
-            <ul>
-                <li><strong>type</strong>: It is one of 'BOOK:START', 'PAGE', or 'BOOK:END'</li>
-                <li><strong>json</strong></li>
-                <li><strong>bookUuid</strong></li>
-                <li><strong>pageUuid</strong> (if applicable)</li>
-            </ul>
-            <label for="analyze-code">Extra JS to run:</label>
-            <br/>
-            <textarea name="code" id="analyze-code" cols="80" rows="10"></textarea>
-        </div>
         <ul>
             <li><input type="radio" id="use-xhtml" name="sourceFormat" value="xhtml"/><label for="use-xhtml">Search
                 XHTML</label></li>
             <li><input type="radio" id="use-cnxml" name="sourceFormat" value="cnxml"/><label for="use-cnxml">Search
                 CNXML</label></li>
         </ul>
-        <label for="show-log">Show Log:</label>
-        <input id="show-log" type="checkbox"/>
-        <br />
         <label for="books">Books to search:</label>
         <br/>
-        <select id="books" name="books" multiple="multiple" class="col-sm-8" size="15"></select>
+        <select id="books" name="books" multiple="multiple" class="col-sm-8" size="15">
+            <option disabled="disabled">Loading... hopefully</option>
+        </select>
     </form>
     <h4 class="search-not-started" id="resultsLabel">Results</h4>
+    <p>
+        <button id="stop" disabled="disabled">Stop</button>
+        <button id="skip" disabled="disabled">Skip</button>
+    </p>
     <ul id="results"></ul>
     <h4 class="search-not-started" id="errorLogLabel">Error Log</h4>
     <ul id="errors" style="font-size: x-small">
