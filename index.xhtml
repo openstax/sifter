@@ -64,8 +64,6 @@
             <div id="validation-message"></div>
             <input name="q" id="selector" placeholder="CSS or XPath (//h:*) Selector" class="col-sm-6"/>
             <button type="submit" id="start">Start</button>
-            <button id="stop" disabled="disabled">Stop</button>
-            <button id="skip" disabled="disabled">Skip</button>
         </div>
         <br/>
         <ul>
@@ -81,6 +79,10 @@
         </select>
     </form>
     <h4 class="search-not-started" id="resultsLabel">Results</h4>
+    <p>
+        <button id="stop" disabled="disabled">Stop</button>
+        <button id="skip" disabled="disabled">Skip</button>
+    </p>
     <ul id="results"></ul>
     <h4 class="search-not-started" id="errorLogLabel">Error Log</h4>
     <ul id="errors" style="font-size: x-small">
