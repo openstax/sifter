@@ -177,6 +177,9 @@ window.addEventListener('load', () => {
      const getPageUrls = async (format, bookUrl, bookInfo) => {
           if (format === 'xhtml') {
                const bookJson = await fetchWithBackoff(bookUrl, true)
+               if (bookJson === null) {
+                    throw new Error(`BUG: Could not find the book even though this URL worked earlier when building the book list ${bookUrl}`)
+               }
                const pageUuids = []
                recLeafPages(pageUuids, bookJson.tree)
                const pageUrls = pageUuids.map(pageUuid => {
@@ -406,7 +409,7 @@ window.addEventListener('load', () => {
                     if (!loadedBooks.has(slug)) {
                          const shortSha = commit_sha.substring(0, 7)
                          const url = `${s3RootUrl}/${pipeline}/contents/${uuid}@${shortSha}.json`
-                         const bookJson = fetchWithBackoff(url, true)
+                         const bookJson = await fetchWithBackoff(url, true)
                          if (bookJson) {
                               loadedBooks.set(slug, {url, pipeline, uuid, shortSha})
                               failedBooks.delete(slug)
@@ -449,7 +452,7 @@ window.addEventListener('load', () => {
                          return dom('option', {value: url, selected: true}, [repoName])
                }))
           } else {
-               error(`Unsupported sourceFormat: ${sourceFormat}`)
+               error(`Unsupported sourceFormat: ${sourceFormat.value}`)
           }
      }
 
