@@ -48,7 +48,7 @@ It runs in your browser and pulls content from archive-staging.
 ## Development
 
 1. clone this repository and switch to this directory
-1. start a little static webserver by running `python -m SimpleHTTPServer 8080`
+1. start a little static webserver by running `python -m SimpleHTTPServer 8080` or  `python3 -m http.server 8080` depending on your Python version
 1. visit http://localhost:8080/
 
 
