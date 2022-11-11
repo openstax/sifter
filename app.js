@@ -404,6 +404,7 @@ window.addEventListener("load", () => {
         alert(`Error: ${err.message}`);
         selectorEl.disabled = false;
         startEl.disabled = false;
+        booksEl.disabled = false;
         stopEl.disabled = true;
         skipEl.disabled = true;
         sourceFormat.forEach((el) => {
