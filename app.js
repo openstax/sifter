@@ -109,6 +109,32 @@ window.addEventListener("load", () => {
     }
   }
 
+  const sandbox = new class Sandbox {
+    el = sandboxEl
+    setXml(xmlStr) {
+      this.el.innerHTML = xmlStr
+        .replace(/<\?xml.*?\?>/g, "")
+        .replace(/ src=/g, " data-src=");
+    }
+    isEl(el) { return this.el === el }
+    querySelector(sel) { return this.el.querySelector(sel) }
+    querySelectorAll(sel) { return Array.from(this.el.querySelectorAll(sel)) }
+    queryXpath(sel) {
+      const ret = [];
+      const xpathResult = document.evaluate(
+        sel,
+        this.el,
+        xpathNamespaceResolver,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+        null
+      )
+      for (let i = 0; i < xpathResult.snapshotLength; i++) {
+        ret.push(xpathResult.snapshotItem(i));
+      }
+      return ret;
+    }
+  }
+
   let isValid = false;
 
   function getSelectedBookUrls() {
@@ -129,13 +155,7 @@ window.addEventListener("load", () => {
     // validate it as an XPath (ensure it begins with "/h:" or "//h:")
     if (/^\/{1,2}[h,c,m]:/.test(selector)) {
       try {
-        document.evaluate(
-          selector,
-          sandboxEl,
-          xpathNamespaceResolver,
-          XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-          null
-        );
+        sandbox.queryXpath(selector)
         return ""; // valid!
       } catch (e) {
         return "Malformed XPath selector";
@@ -205,10 +225,10 @@ window.addEventListener("load", () => {
       return pageUrls;
     } else if (format === "cnxml") {
       const metaInfBooksXml = await fetchWithBackoff(bookUrl, false);
-      sandboxEl.innerHTML = metaInfBooksXml.replace(/ src=/g, " data-src=");
+      sandbox.setXml(metaInfBooksXml);
       //List of collection.xml files
       const collectionXMLLinks = Array.from(
-        sandboxEl.querySelectorAll("book[href]"),
+        sandbox.querySelectorAll("book[href]"),
         (e) => e.attributes.getNamedItem("href").value
       );
       const bookUrls = collectionXMLLinks.map((href) =>
@@ -217,8 +237,8 @@ window.addEventListener("load", () => {
       const pageUrls = [];
       for (const collectionXMLUrl of bookUrls) {
         const collectionXML = await fetchWithBackoff(collectionXMLUrl, false);
-        sandboxEl.innerHTML = collectionXML;
-        sandboxEl.querySelectorAll("[document]").forEach((module) => {
+        sandbox.setXml(collectionXML);
+        sandbox.querySelectorAll("[document]").forEach((module) => {
           const parseUrl = new URL(
             relativeHref(
               collectionXMLUrl,
@@ -323,7 +343,7 @@ window.addEventListener("load", () => {
         }
 
         const matches = findMatches(selector, source);
-        const pageTitleEl = sandboxEl.querySelector("title"); // findMatches populates sandboxEl
+        const pageTitleEl = sandbox.querySelector("title"); // findMatches populates sandbox
         let pageTitle = title
           ? title
           : pageTitleEl
@@ -384,6 +404,7 @@ window.addEventListener("load", () => {
         alert(`Error: ${err.message}`);
         selectorEl.disabled = false;
         startEl.disabled = false;
+        booksEl.disabled = false;
         stopEl.disabled = true;
         skipEl.disabled = true;
         sourceFormat.forEach((el) => {
@@ -544,24 +565,13 @@ window.addEventListener("load", () => {
   function findMatches(selector, html) {
     html = html.replace(/ src=/g, " data-src=");
 
-    sandboxEl.innerHTML = html;
+    sandbox.setXml(html);
     // Try running the selector as CSS or XPath depending on the 1st character ('/' for XPath)
     if (selector[0] === "/") {
       // Verify that the Xpath selector begins with "/h:" or "//h:" or "//m:"
       // See https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#Implementing_a_User_Defined_Namespace_Resolver
       if (/^\/{1,2}[h,c,m]:/.test(selector) || /^\/\/\*/.test(selector)) {
-        const xpathResult = document.evaluate(
-          selector,
-          sandboxEl,
-          xpathNamespaceResolver,
-          XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-          null
-        );
-        const ret = [];
-        for (let i = 0; i < xpathResult.snapshotLength; i++) {
-          ret.push(xpathResult.snapshotItem(i));
-        }
-        return ret;
+        return sandbox.queryXpath(selector);
       } else {
         alert(
           "Malformed XPath selector. All elements must be prefixed with either an `h:` or `m:` or `c:` "
@@ -570,7 +580,7 @@ window.addEventListener("load", () => {
       }
     } else {
       try {
-        return [...sandboxEl.querySelectorAll(selector)];
+        return sandbox.querySelectorAll(selector);
       } catch (err) {
         alert("Malformed CSS selector. Try again.");
         throw new Error(`Malformed selector: "${selector}"`);
@@ -579,7 +589,7 @@ window.addEventListener("load", () => {
   }
 
   function findNearestId(el) {
-    if (!el || el === sandboxEl) {
+    if (!el || sandbox.isEl(el)) {
       return "";
     }
     return (
