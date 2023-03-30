@@ -7,6 +7,7 @@ window.addEventListener("load", () => {
   const s3RootUrl = "https://openstax.org/apps/archive";
   const rexPreviewPrefix = "https://rex-web.herokuapp.com/books";
   const namespacePrefixes = {
+    col: "http://cnx.rice.edu/collxml",
     c: "http://cnx.rice.edu/cnxml",
     cnx: "http://cnx.rice.edu/cnxml",
     h: "http://www.w3.org/1999/xhtml",
@@ -14,6 +15,14 @@ window.addEventListener("load", () => {
     m: "http://www.w3.org/1998/Math/MathML",
     mml: "http://www.w3.org/1998/Math/MathML",
     mathml: "http://www.w3.org/1998/Math/MathML",
+    
+    // Collected while generating EPUB books from our content
+    epub: "http://www.idpf.org/2007/ops",
+    ncx: "http://www.daisy.org/z3986/2005/ncx/",
+    opf: "http://www.idpf.org/2007/opf",
+    dc: "http://purl.org/dc/elements/1.1/",
+    books: "https://openstax.org/namespaces/book-container",
+    cont: "urn:oasis:names:tc:opendocument:xmlns:container"
   };
 
   const qs = (sel) => {
