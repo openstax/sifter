@@ -1,5 +1,6 @@
 window.addEventListener("load", () => {
   const TESTED_ABL_VERSION = 2;
+  const GIGANTIC_TAG_VERSION = 30000101; // Tags increment by {year}{month}{day}. This is to handle unpublished books (which have a tag version of "99999999.999999")
   const ablUrl =
     "https://raw.githubusercontent.com/openstax/content-manager-approved-books/main/approved-book-list.json";
   const openstaxGithubURL = "https://openstax.github.io";
@@ -443,7 +444,7 @@ window.addEventListener("load", () => {
       approvedBookList.approved_books.forEach((bookContainer) => {
         if (bookContainer.repository_name) {
           ablRepos.add(bookContainer.repository_name);
-          bookContainer.versions.forEach((v) => {
+          bookContainer.versions.filter(v => parseFloat(v.min_code_version) < GIGANTIC_TAG_VERSION).forEach((v) => {
             ablPipelines.add(v.min_code_version);
             v.commit_metadata.books.forEach((book) => {
               ablBookSlugCommitPairs.add({
